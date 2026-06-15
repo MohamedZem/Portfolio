@@ -1,0 +1,37 @@
+.footer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    &--text {
+      color: #fff;
+    }
+  }
+
+  &__content--links {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  &__social-link {
+    color: #fff;
+    font-size: 24px;
+    transition: 0.3s;
+
+    &:hover {
+      color: #2563eb;
+    }
+  }
+}

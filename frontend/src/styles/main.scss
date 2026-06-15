@@ -1,0 +1,19 @@
+
+/* STYLES */
+@use "./variables";
+@use "./mixin";
+@use "./style";
+
+/* COMPONENTS */
+@use "../components/Header/header";
+@use "../components/Footer/footer";
+
+
+/* PAGES */
+@use "../pages/Home/home";
+@use "../pages/About/about";
+@use "../pages/Contact/contact";
+@use "../pages/Error/error";
+
+/* SRC */
+@use "../Layout/layout";

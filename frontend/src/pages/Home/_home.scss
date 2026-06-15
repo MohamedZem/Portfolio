@@ -1,0 +1,148 @@
+.home {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+   
+
+  &__content {
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+
+    h2 {
+        font-size: 32px;
+        color: #2563eb;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    h3 {
+    font-size:64px;
+  font-weight: 700;
+  line-height: 1.15;
+
+    }
+
+    span {
+        color: #2563eb;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #fff;
+    }
+
+}
+
+.home__content--bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: flex-start;
+    margin-top: 2rem;
+  }
+
+  &__button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 30px;
+  background: #000;
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2563eb;
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.5),
+      0 0 25px rgba(37, 99, 235, 0.5);
+  }
+}
+
+  &__illustration {
+      display: flex;
+      justify-content: flex-end;
+      
+      
+
+        img {
+            width: 80%;
+            display: block;
+            border: 1px solid #2563eb;
+            border-radius: 20px;
+
+        }
+    }
+
+    &__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+
+  &__infos--statut,
+  &__infos--availability {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 18px;
+  }
+  &__infos--statut {
+    gap: 15px;
+    
+  }
+
+  &__infos--statut span {
+    color: #22c55e
+  }
+
+  &__infos--statut-label {
+    margin-left: 5px;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+
+  &__infos--availability svg {
+    color: #fff;
+    font-size: 18px;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
