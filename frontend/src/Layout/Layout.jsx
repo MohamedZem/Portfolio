@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer.jsx";
 
 function Layout() {
   const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
+
   return (
     <div className="layout">
       <Header />
@@ -13,7 +13,7 @@ function Layout() {
         <Outlet />
       </main>
 
-      <Footer className={isAboutPage ? 'footer--about' : ''} />
+      <Footer />
     </div>
   );
 }

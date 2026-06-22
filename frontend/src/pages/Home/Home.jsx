@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaCalendarAlt } from "react-icons/fa";
-import illustration from '../../assets/illustration-home.png'
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaLaptopCode} from "react-icons/fa";
+import photo from "../../assets/illustration-home.webp";
 
 const githubUrl = `https://github.com/${import.meta.env.VITE_GITHUB_USERNAME}`;
 const linkedinUrl = import.meta.env.VITE_LINKEDIN_URL;
@@ -8,61 +8,71 @@ const linkedinUrl = import.meta.env.VITE_LINKEDIN_URL;
 function Home() {
   return (
     <main className="home">
-      <section className="home__content">
-        <div className="home__content--text">
-          <h2>Développeur Web </h2>
-          <h3>
-            <strong>Je transforme des idées en <span>applications web</span> modernes et performantes.</strong>
-          </h3>
-          <p>
-            Développeur web passionné, je conçois des applications modernes, performantes et accessibles,
-            de l'interface utilisateur jusqu'à la gestion des données.
-          </p>
-        </div>
+      <div className="home__noise"></div>
+      <div className="home__particles"></div>
+      <div className="home__circle"></div>
+      <div className="home__dots"></div>
+      <section className="home__card">
+        <div className="home__profile">
+          <img
+            src={photo}
+            alt="Portrait de Mohamed Zemouchi"
+            className="home__photo"
+          />
 
-        <div className="home__buttons">
-          <Link className="home__button" to="/projects">
-            Voir mes projets
-          </Link>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__button"
-            >
-            <FaGithub />
-            GitHub
+          <h2 className="home__name">
+            Mohamed <br />
+            Zemouchi
+          </h2>
+
+          <p className="home__role">Développeur Web</p>
+
+          <div className="home__socials">
+            <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
             </a>
 
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__button"
-            >
-            <FaLinkedin />
-            LinkedIn
+            <a href={linkedinUrl} alt="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
             </a>
-        </div>
-        <div className="home__infos">
-          <div className="home__infos--statut">
-            <span className="home__infos--statut-label"></span>
-            <p className="home__infos--statut-text">
-            Statut : <span>recherche d'alternance</span>
-          </p>
+
+            <a href="mailto:zemouchi.moh@gmail.com" aria-label="Envoyer un email">
+              <FaEnvelope />
+            </a>
           </div>
-          <p className="home__infos--availability">
-            <FaCalendarAlt />
-            Disponible pour une alternance Full-Stack à partir de septembre 2026
+        </div>
+
+        <div className="home__intro">
+          <h2 className="home__welcome">Bienvenue,</h2>
+
+          <h3 className="home__title">
+            Je transforme des idées en <span>applications web</span> modernes et performantes.
+          </h3>
+
+          <div className="home__buttons">
+           <a
+              href="/cv/Mohamed_Zemouchi_CV.pdf"
+              download
+              className="home__button"
+              aria-label="Télécharger mon CV"
+            >
+              <FaDownload />
+              CV
+          </a>
+
+            <Link to="/projects" className="home__button">
+            <FaLaptopCode />
+              Projets
+            </Link>
+          </div>
+
+          <p className="home__description">
+            Développeur web, je conçois des
+            applications modernes, accessibles et centrées sur les besoins
+            utilisateurs.
           </p>
         </div>
-  
-      </section>  
-
-      <section className="home__illustration">
-        <img src={illustration} alt="Illustration de la page d'accueil" />
       </section>
-      
     </main>
   );
 }

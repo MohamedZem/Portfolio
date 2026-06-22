@@ -1,0 +1,198 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.contact-page {
+  @include page-min-height;
+  @include page-padding;
+  @include page-gradient;
+
+  &__container {
+    @include container(1150px, 95%);
+    display: grid;
+    grid-template-columns: 40% 60%;
+    background: $beige;
+    box-shadow: $shadow-lg;
+  }
+
+  &__intro {
+    padding: $space-6xl $space-5xl;
+    background: $beige;
+    color: $black;
+
+    h1 {
+      margin: $space-xl 0;
+      font-size: 52px;
+      line-height: $line-height-tight;
+    }
+
+    p {
+      font-size: $font-size-lg;
+      line-height: $line-height-relaxed;
+    }
+  }
+
+  &__eyebrow {
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: $font-weight-bold;
+  }
+
+  &__infos {
+    margin-top: $space-5xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+  }
+
+  &__card {
+    padding: $space-2xl;
+    background: $white;
+    border-left: 5px solid $primary;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    @include transition();
+
+    span {
+      display: block;
+      margin-bottom: $space-sm;
+      color: $text-muted;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    strong {
+      display: block;
+      color: $text-dark;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__form {
+    padding: $space-6xl;
+    background: $green;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-xl;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    label {
+      color: $beige;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: $space-lg $space-xl;
+    border: 1px solid rgba($beige, 0.35);
+    border-radius: $radius-md;
+    background: transparent;
+    color: $beige;
+    font-size: $font-size-base;
+    outline: none;
+    @include transition();
+
+    &::placeholder {
+      color: rgba($beige, 0.65);
+    }
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.18);
+    }
+  }
+
+  textarea {
+    min-height: 170px;
+    resize: vertical;
+  }
+
+  .button {
+    @include flex-center;
+  }
+
+  button {
+    @include primary-button;
+    width: fit-content;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    font-weight: $font-weight-semibold;
+
+    &--success {
+      color: $primary-light;
+    }
+
+    &--error {
+      color: #ffb4b4;
+    }
+  }
+}
+
+@include respond-mobile {
+  .contact-page {
+    background: $green;
+
+    &__container {
+      grid-template-columns: 1fr;
+    }
+
+    &__intro,
+    &__form {
+      padding: $space-4xl $space-2xl;
+    }
+
+    &__intro {
+      h1 {
+        font-size: $font-size-4xl;
+      }
+    }
+
+    &__row {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@include respond-small {
+  .contact-page {
+    padding: $space-3xl $space-lg;
+
+    &__intro,
+    &__form {
+      padding: $space-3xl $space-xl;
+    }
+
+    &__intro h1 {
+      font-size: $font-size-3xl;
+    }
+  }
+}

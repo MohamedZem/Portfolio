@@ -1,0 +1,101 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixin" as *;
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3xl;
+  margin-top: $space-4xl;
+
+  &__category {
+    padding: $space-4xl;
+    @include card($beige);
+
+    h4 {
+      margin-bottom: $space-xl;
+      padding-bottom: $space-md;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $text-dark;
+      border-bottom: 2px solid $primary;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-md;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+      padding: $space-md $space-lg;
+      border-radius: $radius-pill;
+      background: $green;
+      color: $beige;
+      font-weight: $font-weight-semibold;
+      @include transition(all);
+
+      &:hover {
+        background: $primary;
+        color: $black;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xl;
+  }
+}
+
+@include respond-tablet {
+  .skills {
+    grid-template-columns: 1fr;
+    gap: $space-2xl;
+  }
+}
+
+@include respond-mobile {
+  .skills {
+    margin-top: $space-3xl;
+
+    &__category {
+      padding: $space-3xl;
+    }
+
+    &__list {
+      justify-content: center;
+
+      li {
+        padding: $space-sm $space-lg;
+      }
+    }
+  }
+}
+
+@include respond-small {
+  .skills {
+    &__category {
+      padding: $space-2xl;
+
+      h4 {
+        font-size: $font-size-xl;
+      }
+    }
+
+    &__list {
+      li {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}

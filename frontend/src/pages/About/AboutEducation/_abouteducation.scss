@@ -1,0 +1,158 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixin" as *;
+
+.education {
+  @include container(1200px, 95%);
+
+  h3 {
+    margin-bottom: $space-4xl;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+  }
+
+  &__list {
+    position: relative;
+    padding-left: $space-6xl;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: $space-xl;
+      width: 3px;
+      background: $primary;
+    }
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: $space-5xl;
+    padding: $space-4xl;
+    @include card($beige);
+    @include transition(transform);
+
+    &:hover {
+      transform: translateX($space-sm);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: $space-4xl;
+      left: -45px;
+      width: 18px;
+      height: 18px;
+      border-radius: $radius-full;
+      background: $primary;
+      border: 5px solid $beige;
+    }
+
+    h4 {
+      margin: $space-lg 0 $space-sm;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $text-dark;
+    }
+
+    p {
+      margin-top: $space-lg;
+      line-height: $line-height-relaxed;
+      color: $text-muted;
+    }
+  }
+
+  &__item--featured {
+    border: 3px solid $primary;
+    background: linear-gradient(135deg, $beige, $white);
+  }
+
+  &__badge {
+    position: absolute;
+    top: -22px;
+    right: $space-3xl;
+    @include flex-center;
+    width: 62px;
+    height: 62px;
+    border-radius: $radius-full;
+    background: $primary;
+    color: $white;
+    font-size: $font-size-3xl;
+    box-shadow: $shadow-sm;
+  }
+
+  &__date {
+    display: inline-block;
+    padding: $space-sm $space-xl;
+    border-radius: $radius-pill;
+    background: $green;
+    color: $white;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  &__school {
+    color: $primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+  }
+
+  &__current {
+    display: inline-block;
+    margin-top: $space-md;
+    padding: 7px $space-lg;
+    border-radius: $radius-pill;
+    background: $green;
+    color: $white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+  }
+}
+
+@include respond-mobile {
+  .education {
+    h3 {
+      font-size: $font-size-3xl;
+    }
+
+    &__list {
+      padding-left: $space-4xl;
+
+      &::before {
+        left: $space-md;
+      }
+    }
+
+    &__item {
+      padding: $space-3xl;
+
+      &::before {
+        left: -34px;
+      }
+    }
+
+    &__badge {
+      width: 52px;
+      height: 52px;
+      right: $space-xl;
+      font-size: $font-size-2xl;
+    }
+  }
+}
+
+@include respond-small {
+  .education {
+    &__list {
+      padding-left: $space-3xl;
+    }
+
+    &__item {
+      padding: $space-2xl;
+
+      h4 {
+        font-size: $font-size-xl;
+      }
+    }
+  }
+}

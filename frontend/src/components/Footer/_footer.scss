@@ -1,37 +1,104 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
 .footer {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  
+  padding: $space-lg;
+  background: $green;
+  border-top: 2px solid rgba($primary, 0.12);
+  @include flex-center;
 
   &__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+    @include flex-center;
+    gap: $space-lg;
+  }
 
-    &--text {
-      color: #fff;
-    }
+  &__content--text,
+  &__text {
+    color: $text;
+    font-size: $font-size-sm;
+    line-height: $line-height-normal;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: $radius-full;
+    object-fit: cover;
   }
 
   &__content--links {
     position: absolute;
-    right: 20px;
+    right: $space-lg;
     display: flex;
-    gap: 20px;
-    padding: 10px;
+    align-items: center;
+    gap: $space-xl;
+    padding: $space-md;
+  }
+
+  &__nav,
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: $space-xl;
   }
 
   &__social-link {
-    color: #fff;
-    font-size: 24px;
-    transition: 0.3s;
+    color: $text;
+    font-size: $font-size-2xl;
+    @include transition(color, $transition-base);
 
     &:hover {
-      color: #2563eb;
+      color: $primary;
+    }
+  }
+}
+
+@include respond-mobile {
+  .footer {
+    padding: $space-5xl $space-lg;
+    text-align: center;
+
+    &__content {
+      flex-direction: column;
+      gap: $space-2xl;
+    }
+
+    &__content--links {
+      position: static;
+      justify-content: center;
+      margin-top: $space-md;
+    }
+
+    &__nav,
+    &__socials {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@include respond-small {
+  .footer {
+    padding: $space-4xl $space-lg;
+
+    &__nav {
+      flex-direction: column;
+      gap: $space-md;
+    }
+
+    &__socials {
+      gap: $space-lg;
+    }
+
+    &__social-link {
+      font-size: $font-size-xl;
+    }
+
+    &__text,
+    &__content--text {
+      font-size: $font-size-sm;
+      line-height: $line-height-relaxed;
     }
   }
 }

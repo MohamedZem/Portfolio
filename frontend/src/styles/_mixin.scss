@@ -1,0 +1,141 @@
+@use "./variables" as *;
+
+@mixin smooth-transition {
+  transition: $transition-slow;
+}
+
+@mixin transition($property: all, $duration: $transition-base) {
+  transition: $property $duration;
+}
+
+@mixin fade-in($duration: $transition-slow) {
+  animation: fadeIn $duration ease;
+}
+
+@mixin page-min-height {
+  min-height: calc(100vh - $header-height);
+}
+
+@mixin page-padding {
+  padding: 50px 20px;
+}
+
+@mixin page-gradient {
+  background: linear-gradient(
+    to right,
+    $beige-dark 0%,
+    $beige-dark 35%,
+    $green 35%,
+    $green 100%
+  );
+}
+
+@mixin container($max: 1200px, $width: 95%) {
+  width: min($max, $width);
+  margin: 0 auto;
+}
+
+@mixin card($bg: $beige) {
+  background: $bg;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin text-title($color: $primary) {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color;
+}
+
+@mixin text-paragraph($color: $text-muted) {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+  color: $color;
+}
+
+@mixin section-container($max: 1200px) {
+  @include page-min-height;
+  @include page-padding;
+  @include container($max);
+}
+
+@mixin icon-circle( $size: 60px, $background: $primary, $color: $white) {
+  width: $size;
+  height: $size;
+  border-radius: $radius-full;
+  @include flex-center;
+  background: $background;
+  color: $color;
+}
+
+@mixin glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@mixin button-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+@mixin primary-button {
+  @include button-base;
+  padding: 14px 28px;
+  border-radius: $radius-pill;
+  background: $beige;
+  color: $green;
+
+  &:hover {
+    background: $primary;
+    color: $black;
+    transform: translateY(-3px);
+  }
+}
+
+@mixin tag {
+  padding: 8px 16px;
+  border-radius: $radius-pill;
+  border: 1px solid rgba(216, 188, 130, 0.3);
+  color: $primary;
+  font-weight: 700;
+  font-size: 14px;
+  
+}
+
+
+@mixin respond-tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+@mixin respond-mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin respond-small {
+  @media (max-width: 480px) {
+    @content;
+  }
+}

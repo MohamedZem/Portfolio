@@ -1,86 +1,98 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
 .header {
-  background: #000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
-  padding: 0 20px;
+  top: 0;
+  left: 0;
+  z-index: $z-fixed;
+
+  width: 100%;
+  padding: 0 $space-lg;
+
+  background: $green;
+  border-bottom: 2px solid rgba($primary, 0.15);
+  box-shadow: $shadow-sm;
+
+  @include transition(transform, $transition-slow);
+
+  &--hidden {
+    transform: translateY(-100%);
+  }
 
   &__content {
-    width: 100%;;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
+    @include container(100%, 100%);
+    @include flex-between;
+
+    min-height: $header-height;
+    gap: $space-3xl;
   }
 
   &__logo {
-    margin-top: 5px;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+
+    border-radius: $radius-full;
     object-fit: cover;
-  } 
+
+    @include transition(transform);
+
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
 
   &__nav {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    @include flex-center;
+    gap: $space-2xl;
   }
 
   &__link {
-    color: #ccc;
+    padding: $space-md $space-lg;
+
+    border-radius: $radius-sm;
+
+    color: $text;
     text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.2s ease;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+
+    @include transition();
 
     &:hover {
-      color: #2563eb;
-      background: rgba(100, 108, 255, 0.2);
+      color: $primary;
+      background: rgba($primary, 0.12);
     }
 
     &.active {
-      color: #2563eb;
-      font-weight: 700;
-      border-bottom: 3px solid #2563eb;
+      color: $white;
+      background: rgba($primary, 0.18);
+      border-bottom: 3px solid $primary;
+      font-weight: $font-weight-bold;
     }
   }
 }
 
-@media (prefers-color-scheme: light) {
+@include respond-mobile {
   .header {
-    background: #fff;
-    border-bottom-color: rgba(0, 0, 0, 0.1);
+    padding: $space-sm $space-lg;
 
-    &__logo {
-      color: #213547;
-    }
-
-    &__link {
-      color: #444;
-
-      &:hover {
-        color: #213547;
-        background: rgba(85, 102, 255, 0.1);
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
     &__content {
+      min-height: auto;
       flex-direction: column;
-      gap: 1rem;
+      gap: $space-lg;
     }
 
     &__nav {
       width: 100%;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: $space-md;
+    }
+
+    &__link {
+      padding: $space-sm $space-md;
+      font-size: $font-size-sm;
     }
   }
 }

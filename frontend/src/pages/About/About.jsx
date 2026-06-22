@@ -1,41 +1,76 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from "react-router-dom";
 
 function About() {
   return (
     <main className="about">
-      <h2>À propos</h2>
 
-      <nav className="about-nav">
-        <NavLink 
-          to="/about"
-           end
-          className={({ isActive }) => isActive ? 'about-nav__link active' : 'about-nav__link'}
-        >
-          Biographie
-        </NavLink>
-        <NavLink 
-          to="experience" 
-          className={({ isActive }) => isActive ? 'about-nav__link active' : 'about-nav__link'}
-        >
-          Expérience
-        </NavLink>
-        <NavLink 
-          to="education" 
-          className={({ isActive }) => isActive ? 'about-nav__link active' : 'about-nav__link'}
-        >
-          Formations
-        </NavLink>
-        <NavLink 
-          to="skills" 
-          className={({ isActive }) => isActive ? 'about-nav__link active' : 'about-nav__link'}
-        >
-          Compétences
-        </NavLink>
-      </nav>
+      <section className="about__card">
 
-      <div className="about-content">
-        <Outlet />
-      </div>
+        <aside className="about__sidebar">
+
+          <h2 className="about__heading">
+            À propos
+          </h2>
+
+          <nav className="about__nav">
+
+            <NavLink
+              to="/about"
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? "about__link about__link--active"
+                  : "about__link"
+              }
+            >
+              Biographie
+            </NavLink>
+
+            <NavLink
+              to="experience"
+              className={({ isActive }) =>
+                isActive
+                  ? "about__link about__link--active"
+                  : "about__link"
+              }
+            >
+              Expérience
+            </NavLink>
+
+            <NavLink
+              to="education"
+              className={({ isActive }) =>
+                isActive
+                  ? "about__link about__link--active"
+                  : "about__link"
+              }
+            >
+              Formations
+            </NavLink>
+
+            <NavLink
+              to="skills"
+              className={({ isActive }) =>
+                isActive
+                  ? "about__link about__link--active"
+                  : "about__link"
+              }
+            >
+              Compétences
+            </NavLink>
+
+          </nav>
+
+        </aside>
+
+        <section className="about__content">
+
+          <Outlet />
+
+        </section>
+
+      </section>
+
     </main>
   );
 }

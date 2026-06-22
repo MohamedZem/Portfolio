@@ -9,19 +9,3 @@ export async function getProjects() {
 
   return response.json();
 }
-
-export async function sendContactMessage(formData) {
-  const response = await fetch(`${API_URL}/contact`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-  });
-
-  if (!response.ok) {
-    throw new Error("Erreur lors de l'envoi du message");
-  }
-
-  return response.json();
-}

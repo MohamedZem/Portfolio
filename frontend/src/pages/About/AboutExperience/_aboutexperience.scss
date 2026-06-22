@@ -1,0 +1,159 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixin" as *;
+
+.experience {
+  @include container(1200px, 95%);
+
+  h3 {
+    margin-bottom: $space-6xl;
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5xl;
+  }
+
+  &__card {
+    display: flex;
+    gap: $space-4xl;
+    padding: $space-4xl;
+    @include card($beige);
+    @include transition(transform);
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: $radius-full;
+    background: $primary;
+    color: $white;
+    font-size: 36px;
+  }
+
+  &__content {
+    flex: 1;
+
+    h4 {
+      margin: $space-lg 0;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-semibold;
+      color: $text-dark;
+    }
+
+    p {
+      margin-bottom: $space-4xl;
+      line-height: $line-height-relaxed;
+      color: $text-muted;
+    }
+  }
+
+  &__date {
+    display: inline-block;
+    padding: $space-md $space-xl;
+    border-radius: $radius-pill;
+    background: $green;
+    color: $white;
+    font-weight: $font-weight-bold;
+  }
+
+  &__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-lg;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+      padding: $space-md $space-xl;
+      border-radius: $radius-pill;
+      background: $white;
+      color: $text-dark;
+      font-weight: $font-weight-semibold;
+      box-shadow: $shadow-xs;
+      @include transition(transform);
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+
+    svg {
+      color: $primary;
+    }
+  }
+}
+
+@include respond-tablet {
+  .experience {
+    h3 {
+      font-size: $font-size-4xl;
+    }
+
+    &__card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__content {
+      h4 {
+        font-size: $font-size-2xl;
+      }
+    }
+
+    &__skills {
+      justify-content: center;
+    }
+  }
+}
+
+@include respond-mobile {
+  .experience {
+    &__card {
+      padding: $space-3xl;
+      gap: $space-3xl;
+    }
+
+    &__icon {
+      width: 70px;
+      height: 70px;
+      font-size: 30px;
+    }
+  }
+}
+
+@include respond-small {
+  .experience {
+    h3 {
+      font-size: $font-size-3xl;
+    }
+
+    &__card {
+      padding: $space-2xl;
+    }
+
+    &__content {
+      h4 {
+        font-size: $font-size-xl;
+      }
+    }
+
+    &__skills span {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

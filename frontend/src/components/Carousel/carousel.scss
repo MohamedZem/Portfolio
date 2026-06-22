@@ -1,0 +1,172 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.carousel {
+  @include container(1200px, 95%);
+  display: flex;
+  align-items: center;
+  gap: $space-2xl;
+
+  &__thumbs {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    gap: $space-2xl;
+  }
+
+  &__thumb {
+    @include flex-center;
+    position: relative;
+    width: 100%;
+    height: 125px;
+    padding: $space-lg;
+    border: 2px solid transparent;
+    border-radius: $radius-lg;
+    background: $beige;
+    cursor: pointer;
+
+    @include smooth-transition;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      @include smooth-transition;
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(-4px);
+    }
+
+    &--offset-0,
+    &--offset-4 {
+      opacity: 0.35;
+      transform: scale(0.82);
+    }
+
+    &--offset-1,
+    &--offset-3 {
+      opacity: 0.65;
+      transform: scale(0.92);
+    }
+
+    &--active {
+      opacity: 1;
+      z-index: 5;
+      transform: translateY(-12px) scale(1.12);
+      background: $white;
+      border-color: $primary;
+      box-shadow: 0 0 0 4px rgba($primary, 0.18), $shadow-lg;
+
+      img {
+        transform: scale(1.15);
+      }
+    }
+  }
+
+  &__arrow {
+    @include flex-center;
+    width: $space-5xl;
+    height: $space-5xl;
+    flex-shrink: 0;
+    border: none;
+    border-radius: $radius-full;
+    background: $beige;
+    color: $green;
+    cursor: pointer;
+    font-size: $font-size-lg;
+    @include transition();
+
+    &:hover {
+      background: $primary;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@include respond-tablet {
+  .carousel {
+    @include container(900px, 95%);
+    gap: $space-lg;
+
+    &__thumbs {
+      gap: $space-md;
+    }
+
+    &__thumb {
+      height: 100px;
+      padding: $space-md;
+
+      &--active {
+        transform: translateY(-8px) scale(1.08);
+      }
+    }
+
+    &__arrow {
+      width: 42px;
+      height: 42px;
+    }
+  }
+}
+
+@include respond-mobile {
+  .carousel {
+    width: 100%;
+    gap: $space-sm;
+
+    &__thumbs {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $space-sm;
+    }
+
+    &__thumb {
+      height: 90px;
+      padding: $space-md;
+    }
+
+    &__thumb--offset-0,
+    &__thumb--offset-4 {
+      display: none;
+    }
+
+    &__thumb--offset-1,
+    &__thumb--offset-3 {
+      opacity: 0.55;
+      transform: scale(0.9);
+    }
+
+    &__thumb--active {
+      transform: translateY(-6px) scale(1.08);
+    }
+
+    &__arrow {
+      width: 38px;
+      height: 38px;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+@include respond-small {
+  .carousel {
+    gap: $space-sm;
+
+    &__thumbs {
+      gap: $space-sm;
+    }
+
+    &__thumb {
+      height: 75px;
+      padding: $space-sm;
+      border-radius: $radius-md;
+    }
+
+    &__arrow {
+      width: 34px;
+      height: 34px;
+      font-size: $font-size-xs;
+    }
+  }
+}

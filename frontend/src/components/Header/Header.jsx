@@ -1,14 +1,39 @@
 import { NavLink } from 'react-router-dom'
-import logo from '../../assets/Logo-MZ.png'
+import { useEffect, useState } from "react";
+import logo from '../../assets/Logo-MZ.webp'
 
 
 function Header() {
+  const [showHeader, setShowHeader] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 90) {
+        // On descend
+        setShowHeader(false);
+      } else {
+        // On remonte
+        setShowHeader(true);
+      }
+console.log(showHeader);
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
 
-    <header className="header">
+    <header className={`header ${showHeader ? "" : "header--hidden"}`}>
   <div className="header__content">
     <NavLink to="/">
-        <img className="header__logo" src={logo} alt="Logo" />
+        <img className="header__logo" src={logo} alt="Logo Portfolio" />
         <h1 hidden>Portfolio Zemouchi Mohamed</h1>
     </NavLink>
 
@@ -51,7 +76,7 @@ function Header() {
     </nav>
   </div>
 </header>
-  )
+  );
 }
 
 export default Header

@@ -1,0 +1,134 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixin" as *;
+
+.about__section {
+  width: 100%;
+}
+
+.biography {
+  @include container(1300px, 95%);
+  display: flex;
+  flex-direction: column;
+  gap: $space-5xl;
+
+  h3 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $primary;
+  }
+
+  &__intro {
+    padding: $space-4xl;
+    border-left: 6px solid $primary;
+    border-radius: $radius-lg;
+    @include card;
+
+    p {
+      font-size: $font-size-lg;
+      line-height: $line-height-relaxed;
+      color: $text-dark;
+    }
+  }
+
+  &__timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-4xl;
+  }
+
+  &__card {
+    padding: $space-4xl;
+    @include card;
+    @include transition(transform);
+
+    &:hover {
+      transform: translateY(-8px);
+    }
+
+    h4 {
+      margin: $space-xl 0;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $text-dark;
+    }
+
+    p {
+      line-height: $line-height-relaxed;
+      color: $text-muted;
+    }
+  }
+
+  &__step {
+    display: inline-block;
+    padding: $space-sm $space-xl;
+    border-radius: $radius-pill;
+    background: $primary-dark;
+    color: $white;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  &__values {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-xl;
+  }
+
+  &__value {
+    padding: $space-3xl;
+    background: $green;
+    color: $beige;
+    border-radius: $radius-lg;
+    @include transition();
+
+    &:hover {
+      background: $primary;
+      transform: translateY(-6px);
+    }
+
+    h5 {
+      margin-bottom: $space-lg;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    p {
+      line-height: $line-height-normal;
+    }
+  }
+}
+
+@include respond-tablet {
+  .biography {
+    gap: $space-4xl;
+    &__timeline,
+    &__values {
+      grid-template-columns: 1fr;
+    }
+
+    &__intro,
+    &__card,
+    &__value {
+      padding: $space-3xl;
+    }
+  }
+}
+
+@include respond-mobile {
+  .biography {
+    gap: $space-3xl;
+    h3 {
+      font-size: $font-size-3xl;
+    }
+
+    &__intro,
+    &__card,
+    &__value {
+      padding: $space-2xl;
+    }
+
+    &__step {
+      font-size: $font-size-xs;
+    }
+  }
+}

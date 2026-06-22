@@ -1,148 +1,322 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+
 .home {
-    display: flex;
+  position: relative;
+  overflow: hidden;
+  @include page-min-height;
+  @include page-padding;
+  @include flex-center;
+  @include page-gradient;
+
+  &__noise,
+  &__particles,
+  &__circle,
+  &__dots {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__noise {
+    inset: 0;
+    opacity: 0.08;
+    background-image: radial-gradient(circle, $white 1px, transparent 1px);
+    background-size: $space-xs $space-xs;
+    mix-blend-mode: overlay;
+  }
+
+  &__particles {
+    inset: 0;
+    opacity: 0.45;
+    background-image:
+      radial-gradient(circle, $primary 2px, transparent 2px),
+      radial-gradient(circle, $white 1.5px, transparent 1.5px),
+      radial-gradient(circle, $primary 3px, transparent 3px),
+      radial-gradient(circle, $white 2px, transparent 2px);
+    background-size: 450px 450px, 650px 650px, 900px 900px, 1200px 1200px;
+    background-position: 10% 20%, 80% 30%, 60% 80%, 90% 70%;
+
+    animation:
+      floatParticles 18s linear infinite,
+      sparkle 4s ease-in-out infinite;
+  }
+
+  &__circle {
+    width: 450px;
+    height: 450px;
+    left: -180px;
+    top: 100px;
+    border-radius: $radius-full;
+    border: 1px solid rgba($primary, 0.25);
+  }
+
+  &__dots {
+    width: 90px;
+    height: 90px;
+    top: 90px;
+    right: 80px;
+    background-image: radial-gradient($primary 2px, transparent 2px);
+    background-size: 18px 18px;
+    opacity: 0.4;
+  }
+
+  &__card {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    padding: 30px;
-   
-
-  &__content {
+    min-height: 400px;
+    padding: 0 20%;
     display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 60%;
+    animation: cardAppear 0.9s ease forwards;
+  }
 
-    h2 {
-        font-size: 32px;
-        color: #2563eb;
-        font-weight: 300;
-        text-transform: uppercase;
+  &__profile {
+    width: 35%;
+    padding: $space-xl 0 0;
+    background: $beige;
+    text-align: center;
+    box-shadow: $shadow-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  &__photo {
+    width: 190px;
+    height: 190px;
+    margin-bottom: $space-4xl;
+    border-radius: $radius-full;
+    object-fit: contain;
+
+    @include transition(transform, $transition-slow);
+
+    &:hover {
+      transform: scale(1.05);
     }
+  }
 
-    h3 {
-    font-size:64px;
-  font-weight: 700;
-  line-height: 1.15;
+  &__name {
+    margin: 0;
+    color: $black;
+    font-size: $font-size-4xl;
+    line-height: $line-height-tight;
+    @include transition(letter-spacing, $transition-slow);
 
+    &:hover {
+      letter-spacing: 2px;
     }
+  }
+
+  &__role {
+    margin-bottom: $space-4xl;
+    color: $black;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: $font-size-sm;
+  }
+
+  &__socials {
+    width: 100%;
+    margin-top: $space-md;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    gap: 30%;
+    background: $green;
+    font-size: $font-size-2xl;
+
+    a {
+      color: $black;
+      @include transition();
+
+      &:hover {
+        color: $primary;
+        transform: translateY(-5px) scale(1.15);
+      }
+    }
+  }
+
+  &__intro {
+    width: 65%;
+    padding: 5% 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: $beige;
+  }
+
+  &__welcome {
+    margin: 0 0 $space-2xl;
+    color: $black;
+    font-size: $font-size-6xl;
+    line-height: 1;
+    animation: fadeUp 0.6s 0.3s forwards;
+  }
+
+  &__title {
+    margin: 0;
+    color: $beige;
+    font-size: 34px;
+    line-height: 1.25;
+    animation: fadeUp 0.6s 0.5s forwards;
 
     span {
-        color: #2563eb;
+      color: $primary;
     }
-
-    p {
-        font-size: 18px;
-        line-height: 1.5;
-        color: #fff;
-    }
-
-}
-
-.home__content--bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  }
 
   &__buttons {
+    margin: $space-4xl 0;
     display: flex;
-    flex-direction: row;
-    gap: 15px;
-    align-items: flex-start;
-    margin-top: 2rem;
+    align-items: center;
+    gap: $space-lg;
+    animation: fadeUp 0.6s 0.7s forwards;
   }
 
   &__button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 30px;
-  background: #000;
-  color: #fff;
-  border-radius: 20px;
-  text-decoration: none;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.4),
-    0 0 15px rgba(37, 99, 235, 0.4);
-  transition: all 0.3s ease;
+    @include primary-button;
+    width: 40%;
+    gap: $space-xl;
+    position: relative;
+    overflow: hidden;
 
-  &:hover {
-    background: #2563eb;
-    transform: translateY(-3px);
-    box-shadow:
-      0 12px 30px rgba(0, 0, 0, 0.5),
-      0 0 25px rgba(37, 99, 235, 0.5);
-  }
-}
-
-  &__illustration {
-      display: flex;
-      justify-content: flex-end;
-      
-      
-
-        img {
-            width: 80%;
-            display: block;
-            border: 1px solid #2563eb;
-            border-radius: 20px;
-
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -120%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba($white, 0.55),
+        transparent
+      );
+      transition: $transition-slower;
     }
 
-    &__infos {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
+    &:hover::before {
+      left: 120%;
+    }
   }
 
-
-  &__infos--statut,
-  &__infos--availability {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    font-size: 18px;
-  }
-  &__infos--statut {
-    gap: 15px;
-    
-  }
-
-  &__infos--statut span {
-    color: #22c55e
-  }
-
-  &__infos--statut-label {
-    margin-left: 5px;
-    width: 10px;
-    height: 10px;
-    min-width: 10px;
-    background-color: #22c55e;
-    border-radius: 50%;
-    animation: blink 1.5s infinite;
-  }
-
-  &__infos--availability svg {
-    color: #fff;
-    font-size: 18px;
+  &__description {
+    max-width: 520px;
+    margin: 0 0 $space-lg;
+    color: $beige;
+    font-size: $font-size-lg;
+    line-height: $line-height-relaxed;
+    animation: fadeUp 0.6s 0.9s forwards;
   }
 }
 
-@keyframes blink {
-  0% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-  }
 
-  50% {
-    opacity: 0.4;
-    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
-  }
+@include respond-tablet {
+  .home {
+    min-height: auto;
+    padding: $space-4xl $space-xl;
+    background: $green;
 
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    &__card {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+    }
+
+    &__profile {
+      width: 100%;
+      padding: $space-4xl $space-xl 0;
+      animation: none;
+    }
+
+    &__intro {
+      width: 100%;
+      padding: $space-4xl $space-2xl;
+      background: $green;
+      text-align: center;
+      align-items: center;
+    }
+
+    &__welcome {
+      color: $beige;
+      font-size: $font-size-5xl;
+    }
+
+    &__title {
+      font-size: $font-size-2xl;
+    }
+
+    &__buttons {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    &__button {
+      width: auto;
+      min-width: 150px;
+    }
+
+    &__socials {
+      width: 100%;
+      margin-top: $space-2xl;
+      padding: $space-xl 0;
+      gap: $space-4xl;
+      background: $beige;
+
+      a {
+        font-size: $font-size-2xl;
+        color: $green;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+@include respond-small {
+  .home {
+    padding: $space-3xl $space-lg;
+
+    &__photo {
+      width: 130px;
+      height: 130px;
+    }
+
+    &__name {
+      font-size: $font-size-3xl;
+    }
+
+    &__role {
+      font-size: $font-size-xs;
+      letter-spacing: 3px;
+    }
+
+    &__welcome {
+      font-size: 46px;
+    }
+
+    &__title {
+      font-size: $font-size-xl;
+    }
+
+    &__description {
+      font-size: $font-size-base;
+    }
+
+    &__buttons {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    &__button {
+      width: 100%;
+      max-width: 240px;
+    }
   }
 }

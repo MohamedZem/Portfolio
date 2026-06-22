@@ -1,0 +1,99 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.about {
+  @include page-min-height;
+  @include page-padding;
+  @include page-gradient;
+  @include flex-center;
+
+  &__card {
+    @include container(1300px, 95%);
+    min-height: 650px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background: $beige;
+    box-shadow: $shadow-lg;
+  }
+
+  &__sidebar {
+    padding: $space-5xl $space-4xl;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba($text-dark, 0.15);
+  }
+
+  &__heading {
+    margin-bottom: $space-4xl;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    color: $black;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+  }
+
+  &__link {
+    padding: $space-md $space-xl;
+    border-radius: $radius-pill;
+    color: $text-dark;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    @include transition();
+
+    &:hover,
+    &--active {
+      background: $text-dark;
+      color: $beige;
+    }
+  }
+
+  &__content {
+    padding: $space-6xl;
+    background: $green;
+    color: $beige;
+    overflow-y: auto;
+  }
+}
+
+@include respond-tablet {
+  .about {
+    background: $beige-dark;
+    
+    &__card {
+      grid-template-columns: 1fr;
+    }
+
+    &__sidebar {
+      padding: $space-4xl;
+      border-right: none;
+      border-bottom: 1px solid rgba($black, 0.15);
+      text-align: center;
+    }
+
+    &__nav {
+      align-items: center;
+    }
+
+    &__content {
+      padding: $space-4xl;
+    }
+  }
+}
+
+@include respond-mobile {
+  .about {
+    padding: $space-4xl $space-lg;
+
+    &__heading {
+      font-size: $font-size-3xl;
+    }
+
+    &__content {
+      padding: $space-3xl;
+    }
+  }
+}

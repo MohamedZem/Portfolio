@@ -1,0 +1,43 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.error {
+  @include page-min-height;
+  @include page-padding;
+  @include flex-center;
+  flex-direction: column;
+  gap: $space-3xl;
+  background: $beige-dark;
+  text-align: center;
+
+  &__title {
+    color: $primary;
+    font-size: clamp(110px, 18vw, 240px);
+    font-weight: $font-weight-extra-bold;
+    line-height: 1;
+    text-shadow: 0 18px 40px rgba($black, 0.1);
+  }
+
+  &__subtitle {
+    max-width: 650px;
+    color: $text-dark;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: $line-height-normal;
+  }
+
+  &__link {
+    @include primary-button;
+    margin-top: $space-xl;
+    padding: 15px $space-3xl;
+  }
+}
+
+@include respond-mobile {
+  .error {
+    background: $green;
+
+    &__subtitle {
+      color: $beige;
+    }
+  }
+}

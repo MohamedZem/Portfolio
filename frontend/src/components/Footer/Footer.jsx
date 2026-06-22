@@ -1,4 +1,4 @@
-import logo from '../../assets/Logo-MZ.png'
+import logo from '../../assets/Logo-MZ.webp'
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const githubUrl = `https://github.com/${import.meta.env.VITE_GITHUB_USERNAME}`;
@@ -9,7 +9,7 @@ function Footer() {
   
   return <footer className="footer">
     <div className="footer__content">
-      <img className="logo" src={logo} alt="Logo"/>
+      <img className="logo" src={logo} alt="Logo Portfolio"/>
       <span className="footer__content--text">© {currentYear} Mohamed Zemouchi. All rights reserved</span>
     </div>
     

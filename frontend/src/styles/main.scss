@@ -2,18 +2,27 @@
 /* STYLES */
 @use "./variables";
 @use "./mixin";
+@use "./animations";
 @use "./style";
 
 /* COMPONENTS */
 @use "../components/Header/header";
 @use "../components/Footer/footer";
+@use "../components/Carousel/carousel";
+@use "../components/Modal/modal";
 
 
 /* PAGES */
 @use "../pages/Home/home";
 @use "../pages/About/about";
+@use "../pages/Projects/projects";
 @use "../pages/Contact/contact";
 @use "../pages/Error/error";
+
+@use "../pages/About/AboutBiography/aboutbiography";
+@use "../pages/About/AboutExperience/aboutexperience";
+@use "../pages/About/AboutEducation/abouteducation";
+@use "../pages/About/AboutSkills/aboutskills";
 
 /* SRC */
 @use "../Layout/layout";

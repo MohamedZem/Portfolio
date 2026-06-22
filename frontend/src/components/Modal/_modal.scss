@@ -1,0 +1,63 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  width: 100vw;
+  height: 100vh;
+  padding: $space-5xl;
+  background: rgba($black, 0.85);
+  @include flex-center;
+  cursor: pointer;
+
+  &__image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    background: $beige;
+    border-radius: $radius-lg;
+    cursor: default;
+    @include fade-in;
+  }
+
+  &__close {
+    position: fixed;
+    top: $space-xl;
+    right: $space-5xl;
+    z-index: $z-tooltip;
+    border: none;
+    background: transparent;
+    color: $beige;
+    font-size: $font-size-5xl;
+    line-height: 1;
+    cursor: pointer;
+    @include transition(color);
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+@include respond-mobile {
+
+  .modal {
+
+    padding: $space-xl;
+
+    &__image {
+      max-width: 95vw;
+      max-height: 80vh;
+    }
+
+    &__close {
+      top: $space-lg;
+      right: $space-lg;
+      font-size: $font-size-4xl;
+    }
+
+  }
+
+}

@@ -1,0 +1,132 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.projects-page {
+  @include page-min-height;
+  @include page-padding;
+  background: $green;
+
+  h2 {
+    @include container(1200px, 95%);
+    margin-bottom: $space-4xl;
+    color: $primary;
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-bold;
+  }
+
+  &__infos {
+    @include container(1000px, 95%);
+    margin-top: $space-5xl;
+    margin-bottom: $space-4xl;
+    color: $beige;
+    text-align: center;
+
+    h3 {
+      margin-bottom: $space-xl;
+      color: $beige;
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    p {
+      max-width: 900px;
+      margin: $space-2xl auto 0;
+      color: $beige;
+      font-size: $font-size-lg;
+      line-height: $line-height-normal;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $space-md;
+    margin: $space-xl 0;
+
+    span {
+      @include tag;
+    }
+  }
+
+  &__preview {
+    @include container(1200px, 95%);
+    aspect-ratio: 16 / 9;
+    margin-top: $space-4xl;
+    overflow: hidden;
+    border-radius: $radius-lg;
+    background: $beige;
+    box-shadow: $shadow-lg;
+  }
+
+  &__preview-button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: zoom-in;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      @include transition(transform, $transition-slow);
+    }
+
+    &:hover img {
+      transform: scale(1.02);
+    }
+  }
+
+  &__links {
+    margin-top: $space-4xl;
+    display: flex;
+    justify-content: center;
+    gap: $space-lg;
+
+    a {
+      @include primary-button;
+    }
+  }
+}
+
+@include respond-mobile {
+  .projects-page {
+    padding: $space-4xl $space-lg;
+
+    h1 {
+      font-size: $font-size-4xl;
+      text-align: center;
+    }
+
+    &__infos {
+      margin-top: $space-4xl;
+
+      h2 {
+        font-size: $font-size-3xl;
+      }
+
+      p {
+        font-size: $font-size-base;
+      }
+    }
+
+    &__preview {
+      width: 100%;
+      margin-top: $space-3xl;
+      border-radius: $radius-lg;
+    }
+
+    &__links {
+      flex-direction: column;
+      align-items: center;
+
+      a {
+        width: 100%;
+        max-width: 260px;
+      }
+    }
+  }
+}
