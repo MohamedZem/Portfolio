@@ -1,28 +1,32 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const projectRoutes = require("./routes/project.routes");
-const authRoutes = require("./routes/auth.routes");
 const contactRoutes = require("./routes/contact.routes");
 
 const app = express();
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Accepter les requêtes depuis localhost sur n'importe quel port en développement
-    if (!origin || origin.match(/^http:\/\/localhost:\d+$/)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed"));
-    }
-  }
-}));
+app.use(
+  cors({
+    origin: [/^http:\/\/localhost:\d+$/],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/projects", projectRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  res.status(500).json({
+    message: "Erreur interne du serveur",
+  });
+});
 
 module.exports = app;

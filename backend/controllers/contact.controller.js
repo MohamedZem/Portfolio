@@ -1,76 +1,51 @@
 const Contact = require("../models/Contact");
-const nodemailer = require("nodemailer");
+const { sendContactMail } = require("../services/mail");
 
-exports.createMessage = async (req, res) => {
+exports.sendMessage = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { firstname, lastname, email, subject, message } = req.body;
 
-    const newMessage = new Contact({
-      name,
+    const contact = new Contact({
+      firstname,
+      lastname,
       email,
-      message
+      subject,
+      message,
+      status: "pending",
+      ipAddress: req.ip,
     });
 
-    await newMessage.save();
+    await contact.save();
 
-    const transporterOptions = process.env.EMAIL_HOST
-      ? {
-          host: process.env.EMAIL_HOST,
-          port: Number(process.env.EMAIL_PORT) || 465,
-          secure: process.env.EMAIL_SECURE === "true",
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-          }
-        }
-      : {
-          service: process.env.EMAIL_SERVICE || "gmail",
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-          }
-        };
+    try {
+      await sendContactMail({
+        firstname,
+        lastname,
+        email,
+        subject,
+        message,
+      });
 
-    const transporter = nodemailer.createTransport(transporterOptions);
+      contact.status = "sent";
+      contact.sentAt = new Date();
+      await contact.save();
 
-    // Vérifier la connexion SMTP
-    await transporter.verify();
-    console.log("✓ Connexion SMTP vérifiée");
+      return res.status(200).json({
+        message: "Message envoyé avec succès.",
+      });
+    } catch (mailError) {
+      contact.status = "failed";
+      await contact.save();
 
-    const mailTo = process.env.EMAIL_TO || process.env.EMAIL_USER;
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: mailTo,
-      subject: "Nouveau message depuis le portfolio",
-      html: `
-        <h2>Nouveau message reçu</h2>
-        <p><strong>Nom :</strong> ${name}</p>
-        <p><strong>Email :</strong> ${email}</p>
-        <p><strong>Message :</strong></p>
-        <p>${message}</p>
-      `,
-      text: `Nouveau message reçu\nNom : ${name}\nEmail : ${email}\nMessage : ${message}`
-    });
-
-    console.log("✓ Email envoyé avec succès vers", mailTo);
-
-    res.status(201).json({
-      message: "Message enregistré et e-mail envoyé"
-    });
+      return res.status(500).json({
+        message: "Message sauvegardé, mais l'e-mail n'a pas pu être envoyé.",
+      });
+    }
   } catch (error) {
-    console.error("❌ Erreur contact :", error.message || error);
+    console.error(error);
+
     res.status(500).json({
-      message: "Erreur lors de l'envoi du message: " + (error.message || "erreur inconnue")
+      message: "Erreur lors du traitement du message.",
     });
-  }
-};
-
-exports.getMessages = async (req, res) => {
-  try {
-    const messages = await Contact.find().sort({ createdAt: -1 });
-    res.status(200).json(messages);
-  } catch (error) {
-    res.status(500).json({ message: "Erreur serveur" });
   }
 };
