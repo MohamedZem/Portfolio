@@ -18,7 +18,7 @@ function Header() {
         // On remonte
         setShowHeader(true);
       }
-console.log(showHeader);
+      
       lastScrollY = currentScrollY;
     };
 
