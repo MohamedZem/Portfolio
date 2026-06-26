@@ -10,34 +10,57 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     getProjects()
       .then((data) => {
-        setProjects(data);
-        setCurrentIndex(0);
+        console.log("DATA API :", data);
+
+        if (Array.isArray(data)) {
+          setProjects(data);
+          setCurrentIndex(0);
+        } else {
+          setProjects([]);
+        }
       })
       .catch((error) => {
         console.error(error);
         setError("Impossible de charger les projets.");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
+  if (loading) {
+    return (
+      <main className="projects-page">
+        Chargement...
+      </main>
+    );
+  }
+
   if (error) {
-    return <main className="projects-page">{error}</main>;
+    return (
+      <main className="projects-page">
+        {error}
+      </main>
+    );
   }
 
   if (!projects.length) {
-    return <main className="projects-page">Chargement...</main>;
+    return (
+      <main className="projects-page">
+        Aucun projet disponible.
+      </main>
+    );
   }
 
   const safeIndex = Math.min(currentIndex, projects.length - 1);
   const currentProject = projects[safeIndex];
-
-  if (!currentProject) {
-    return <main className="projects-page">Aucun projet disponible.</main>;
-  }
 
   return (
   <main className="projects-page">
