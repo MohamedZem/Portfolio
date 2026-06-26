@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.mohamedzemouchi.fr/sitemap.xml
+Sitemap: https://portfolio-mohamed-zemouchi.onrender.com/sitemap.xml
