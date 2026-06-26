@@ -1,0 +1,175 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixin" as *;
+
+.project-details {
+  @include page-min-height;
+  @include page-padding;
+
+  background: $green;
+  color: $beige;
+
+  &__back {
+    @include container(1200px, 95%);
+
+    display: inline-flex;
+    align-items: center;
+    gap: $space-md;
+
+    margin-bottom: $space-4xl;
+
+    color: $primary;
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+
+    @include transition();
+
+    &:hover {
+      transform: translateX(-4px);
+    }
+  }
+
+  &__hero {
+    @include container(1200px, 95%);
+
+    text-align: center;
+    margin-bottom: $space-5xl;
+
+    h1 {
+      color: $primary;
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__carousel {
+    @include container(1200px, 95%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-xl;
+
+    margin-bottom: $space-5xl;
+  }
+
+  &__arrow {
+    @include flex-center;
+
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: $radius-full;
+
+    background: $beige;
+    color: $green;
+
+    cursor: pointer;
+    font-size: $font-size-lg;
+
+    @include transition();
+
+    &:hover {
+      background: $primary;
+      transform: scale(1.08);
+    }
+  }
+
+  &__image-wrapper {
+    position: relative;
+    width: min(900px, 100%);
+  }
+
+  &__image-button {
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: zoom-in;
+
+    img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: $beige;
+      border-radius: $radius-lg;
+      padding: $space-lg;
+      box-shadow: $shadow-lg;
+      display: block;
+    }
+  }
+
+  &__counter {
+    position: absolute;
+    right: $space-lg;
+    bottom: $space-lg;
+
+    padding: $space-sm $space-md;
+
+    border-radius: $radius-pill;
+
+    background: rgba($black, 0.65);
+    color: $white;
+
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  &__collapses {
+    @include container(1000px, 95%);
+
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+  }
+
+  &__technologies {
+    @include container(1000px, 95%);
+
+    margin-bottom: $space-5xl;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $space-lg;
+  }
+
+  &__technology {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+
+    padding: $space-md $space-lg;
+
+    border-radius: $radius-pill;
+
+    background: $beige;
+    color: $text-dark;
+
+    font-weight: $font-weight-semibold;
+    box-shadow: $shadow-sm;
+
+    svg {
+      color: $primary;
+      font-size: $font-size-xl;
+    }
+  }
+}
+
+@include respond-mobile {
+  .project-details {
+    &__hero h1 {
+      font-size: $font-size-4xl;
+    }
+
+    &__carousel {
+      gap: $space-md;
+    }
+
+    &__arrow {
+      width: 42px;
+      height: 42px;
+    }
+  }
+}
