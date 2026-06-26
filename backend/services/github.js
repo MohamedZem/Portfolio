@@ -47,6 +47,42 @@ function getRawGithubFileUrl(owner, repoName, branch, filePath) {
   return `https://raw.githubusercontent.com/${owner}/${repoName}/${branch}/${filePath}`;
 }
 
+async function buildGalleryUrls(portfolioData, username, repo) {
+  if (!portfolioData.gallery || !Array.isArray(portfolioData.gallery)) {
+    return [];
+  }
+
+  const galleryUrls = await Promise.all(
+    portfolioData.gallery.map(async (imagePath, index) => {
+      try {
+        const rawGalleryUrl = getRawGithubFileUrl(
+          username,
+          repo.name,
+          repo.default_branch,
+          imagePath
+        );
+
+        const optimizedGalleryPath = await optimizeGithubImage(
+          rawGalleryUrl,
+          `${repo.name}-gallery-${index + 1}`,
+          repo.updated_at,
+          "image"
+        );
+
+        return `${process.env.API_BASE_URL || "http://localhost:4000"}${optimizedGalleryPath}`;
+      } catch (error) {
+        console.log(
+          `Image galerie ignorée pour ${repo.name} : ${imagePath}`
+        );
+
+        return null;
+      }
+    })
+  );
+
+  return galleryUrls.filter(Boolean);
+}
+
 async function buildProject(repo, portfolioData, username) {
   let imageUrl = null;
   let logoUrl = null;
@@ -86,25 +122,33 @@ async function buildProject(repo, portfolioData, username) {
 
     logoUrl = `${process.env.API_BASE_URL || "http://localhost:4000"}${optimizedLogoPath}`;
   }
-
+  
+  const galleryUrls = await buildGalleryUrls(portfolioData, username, repo);
   return {
-    id: repo.id,
-    githubName: repo.name,
-    title: portfolioData.title || repo.name,
-    description: portfolioData.description || repo.description || "",
-    technologies: portfolioData.technologies || [],
-    imageUrl,
-    logoUrl,
-    githubUrl: repo.html_url,
-    demoUrl: portfolioData.demoUrl || repo.homepage || "",
-    order: portfolioData.order || 0,
-    featured: portfolioData.featured || false,
-    category: portfolioData.category || "Autre",
-    updatedAt: repo.updated_at,
-  };
+  id: repo.id,
+  githubName: repo.name,
+  title: portfolioData.title || repo.name,
+  description: portfolioData.description || repo.description || "",
+  technologies: portfolioData.technologies || [],
+  imageUrl,
+  logoUrl,
+  galleryUrls,
+  githubUrl: repo.html_url,
+  demoUrl: portfolioData.demoUrl || repo.homepage || "",
+  order: portfolioData.order || 0,
+  featured: portfolioData.featured || false,
+  category: portfolioData.category || "Autre",
+  context: portfolioData.context || "",
+  objectives: portfolioData.objectives || "",
+  skills: portfolioData.skills || "",
+  results: portfolioData.results || "",
+  improvements: portfolioData.improvements || "",
+  updatedAt: repo.updated_at,
+};
 }
 
 exports.getGithubPortfolioProjects = async () => {
+  console.log ("projets recuper")
   const username = process.env.GITHUB_USERNAME;
   const repos = await getUserRepos();
 
