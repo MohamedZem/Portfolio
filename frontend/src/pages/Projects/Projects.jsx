@@ -10,19 +10,20 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    getProjects()
-      .then((data) => setProjects(data))
-      .catch((error) => {
-        console.error(error);
-        setError("Impossible de charger les projets.");
-  }); 
+useEffect(() => {
+  getProjects()
+    .then((data) => setProjects(data))
+    .catch((error) => {
+      console.error(error);
+      setError("Impossible de charger les projets.");
+    });
 }, []);
 
-  if (error) {
+if (error) {
   return <main className="projects-page">{error}</main>;
-  }
+}
 
   const currentProject = projects[currentIndex];
 
