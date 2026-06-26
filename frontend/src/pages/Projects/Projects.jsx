@@ -12,20 +12,32 @@ function Projects() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(null);
 
-useEffect(() => {
-  getProjects()
-    .then((data) => setProjects(data))
-    .catch((error) => {
-      console.error(error);
-      setError("Impossible de charger les projets.");
-    });
-}, []);
+  useEffect(() => {
+    getProjects()
+      .then((data) => {
+        setProjects(data);
+        setCurrentIndex(0);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Impossible de charger les projets.");
+      });
+  }, []);
 
-if (error) {
-  return <main className="projects-page">{error}</main>;
-}
+  if (error) {
+    return <main className="projects-page">{error}</main>;
+  }
 
-  const currentProject = projects[currentIndex];
+  if (!projects.length) {
+    return <main className="projects-page">Chargement...</main>;
+  }
+
+  const safeIndex = Math.min(currentIndex, projects.length - 1);
+  const currentProject = projects[safeIndex];
+
+  if (!currentProject) {
+    return <main className="projects-page">Aucun projet disponible.</main>;
+  }
 
   return (
   <main className="projects-page">
