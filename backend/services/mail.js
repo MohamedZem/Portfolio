@@ -99,7 +99,7 @@ async function sendContactMail({
     from: `"Portfolio Mohamed Zemouchi" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_USER,
     replyTo: email,
-    subject: `📩 ${subject}`,
+    subject: `${subject}`,
     html: notificationTemplate({ firstname, lastname, email, subject, message }),
   });
 
