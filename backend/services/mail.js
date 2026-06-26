@@ -5,13 +5,16 @@ if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
 }
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "64.233.184.109",
   port: 587,
   secure: false,
-  family: 4,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    servername: "smtp.gmail.com",
   },
   connectionTimeout: 10000,
   greetingTimeout: 10000,
