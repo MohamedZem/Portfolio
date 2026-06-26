@@ -11,7 +11,8 @@ const app = express();
 app.use(
   cors({
     origin: [/^http:\/\/localhost:\d+$/,
-    "https://portfolio-11bx.onrender.comhttps://portfolio-mohamed-zemouchi.onrender.com"
+    "https://portfolio-mohamed-zemouchi.onrender.com",
+    "https://portfolio-11bx.onrender.com"
   ]
   }));
 
