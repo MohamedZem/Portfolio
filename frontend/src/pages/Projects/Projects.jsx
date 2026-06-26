@@ -20,8 +20,8 @@ function Projects() {
   }); 
 }, []);
 
-  if (!projects.length) {
-    return <main className="projects-page">Chargement...</main>;
+  if (error) {
+  return <main className="projects-page">{error}</main>;
   }
 
   const currentProject = projects[currentIndex];
