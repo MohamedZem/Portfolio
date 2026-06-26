@@ -49,7 +49,12 @@ function Carousel({ projects, currentIndex, setCurrentIndex }) {
             aria-label={`Afficher le projet ${project.title}`}
             aria-current={active ? "true" : undefined}
           >
-            <img src={project.logoUrl} alt="" aria-hidden="true" />
+            <img 
+              src={project.logoUrl} 
+              alt="" 
+              loading="lazy"
+              aria-hidden="true" 
+            />
           </button>
         ))}
       </div>

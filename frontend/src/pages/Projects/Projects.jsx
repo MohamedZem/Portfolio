@@ -93,7 +93,11 @@ function Projects() {
         onClick={() => setIsModalOpen(true)}
         aria-label={`Agrandir l'image du projet ${currentProject.title}`}
       >
-        <img src={currentProject.imageUrl} alt={currentProject.title} />
+        <img 
+          src={currentProject.imageUrl} 
+          alt={currentProject.title} 
+          loading="eager"
+        />
       </button>
     </div>
 
