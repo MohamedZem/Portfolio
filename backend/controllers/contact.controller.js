@@ -1,8 +1,7 @@
-const Contact = require("../models/Contact");
-const { sendContactMail } = require("../services/mail");
-
 exports.sendMessage = async (req, res) => {
   try {
+    console.log("Contact reçu :", req.body);
+
     const { firstname, lastname, email, subject, message } = req.body;
 
     const contact = new Contact({
@@ -15,9 +14,13 @@ exports.sendMessage = async (req, res) => {
       ipAddress: req.ip,
     });
 
+    console.log("Avant sauvegarde MongoDB");
     await contact.save();
+    console.log("Après sauvegarde MongoDB");
 
     try {
+      console.log("Avant envoi email");
+
       await sendContactMail({
         firstname,
         lastname,
@@ -25,6 +28,8 @@ exports.sendMessage = async (req, res) => {
         subject,
         message,
       });
+
+      console.log("Email envoyé");
 
       contact.status = "sent";
       contact.sentAt = new Date();
@@ -34,6 +39,8 @@ exports.sendMessage = async (req, res) => {
         message: "Message envoyé avec succès.",
       });
     } catch (mailError) {
+      console.error("Erreur email :", mailError);
+
       contact.status = "failed";
       await contact.save();
 
@@ -42,9 +49,9 @@ exports.sendMessage = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Erreur contact :", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Erreur lors du traitement du message.",
     });
   }

@@ -10,6 +10,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 const COLORS = {
@@ -97,7 +100,7 @@ async function sendContactMail({
 }) {
   await transporter.sendMail({
     from: `"Portfolio Mohamed Zemouchi" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    to: process.env.EMAIL_TO,
     replyTo: email,
     subject: `${subject}`,
     html: notificationTemplate({ firstname, lastname, email, subject, message }),
