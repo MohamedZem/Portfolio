@@ -160,7 +160,18 @@ exports.getGithubPortfolioProjects = async () => {
   console.log("Récupération des projets");
 
   const username = process.env.GITHUB_USERNAME;
-  const repos = await getUserRepos();
+  const allowedRepos = [
+  "Booki",
+  "Kasa",
+  "Nina-Carducci",
+  "Sophie_Bluel",
+  "Mon_Vieux_Grimoire",
+  "Menu-Maker",
+];
+
+const repos = (await getUserRepos()).filter((repo) =>
+  allowedRepos.includes(repo.name)
+);
 
   const projects = [];
 
