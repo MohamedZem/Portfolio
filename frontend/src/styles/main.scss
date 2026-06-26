@@ -10,12 +10,13 @@
 @use "../components/Footer/footer";
 @use "../components/Carousel/carousel";
 @use "../components/Modal/modal";
-
+@use "../components/Collapse/Collapse";
 
 /* PAGES */
 @use "../pages/Home/home";
 @use "../pages/About/about";
 @use "../pages/Projects/projects";
+@use "../pages/ProjectDetails/projectDetails";
 @use "../pages/Contact/contact";
 @use "../pages/Error/error";
 
