@@ -1,3 +1,6 @@
+const Contact = require("../models/Contact");
+const { sendContactMail } = require("../services/mail");
+
 exports.sendMessage = async (req, res) => {
   try {
     console.log("Contact reçu :", req.body);
