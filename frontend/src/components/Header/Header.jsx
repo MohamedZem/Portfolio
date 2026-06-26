@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import logo from '../../assets/Logo-MZ.webp'
-
+import logo from '../../assets/logo-MZ.webp'
 
 function Header() {
   const [showHeader, setShowHeader] = useState(true);

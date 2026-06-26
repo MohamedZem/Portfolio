@@ -1,4 +1,4 @@
-import logo from '../../assets/Logo-MZ.webp'
+import logo from '../../assets/logo-MZ.webp'
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const githubUrl = `https://github.com/${import.meta.env.VITE_GITHUB_USERNAME}`;
