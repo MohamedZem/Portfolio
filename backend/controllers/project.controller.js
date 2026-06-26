@@ -1,38 +1,31 @@
 const { getGithubPortfolioProjects } = require("../services/github");
 
-exports.getAllProjects = async (req, res) => {
-  try {
-    const projects = await getGithubPortfolioProjects();
-
-    return res.status(200).json(projects ?? []);
-  } catch (error) {
-    console.error(error.message);
-
-    return res.status(500).json({
-      message: "Erreur lors de la récupération des projets.",
-    });
-  }
-};
-
 let cachedProjects = null;
 let cacheDate = null;
 
-const CACHE_DURATION = 1000 * 60 * 30;
+const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
 
-exports.getProjects = async (req, res) => {
+exports.getAllProjects = async (req, res) => {
   try {
     const now = Date.now();
 
-    if (cachedProjects && cacheDate && now - cacheDate < CACHE_DURATION) {
+    if (
+      cachedProjects &&
+      cacheDate &&
+      now - cacheDate < CACHE_DURATION
+    ) {
+      console.log("📦 Projets servis depuis le cache");
       return res.status(200).json(cachedProjects);
     }
 
+    console.log("🌐 Récupération des projets depuis GitHub");
+
     const projects = await getGithubPortfolioProjects();
 
-    cachedProjects = projects;
+    cachedProjects = projects ?? [];
     cacheDate = now;
 
-    return res.status(200).json(projects);
+    return res.status(200).json(cachedProjects);
   } catch (error) {
     console.error(error);
 
