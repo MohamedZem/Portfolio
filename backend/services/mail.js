@@ -1,25 +1,10 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-  throw new Error("Les variables EMAIL_USER ou EMAIL_PASS sont manquantes.");
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("La variable RESEND_API_KEY est manquante.");
 }
-
-const transporter = nodemailer.createTransport({
-  host: "64.233.184.109",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    servername: "smtp.gmail.com",
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
 
 const COLORS = {
   beige: "#F4ECE6",
@@ -33,11 +18,17 @@ function formatMessage(message) {
   return message.replace(/\n/g, "<br>");
 }
 
-function notificationTemplate({ firstname, lastname, email, subject, message }) {
+function notificationTemplate({
+  firstname,
+  lastname,
+  email,
+  subject,
+  message,
+}) {
   return `
     <div style="font-family: Arial, sans-serif; background:${COLORS.beige}; padding:30px;">
       <div style="max-width:650px; margin:auto; background:#ffffff; border-radius:16px; overflow:hidden;">
-        
+
         <div style="background:${COLORS.green}; color:${COLORS.beige}; padding:30px;">
           <h1 style="margin:0; font-size:26px;">Nouveau message</h1>
           <p style="margin:8px 0 0; color:${COLORS.gold};">Portfolio Mohamed Zemouchi</p>
@@ -52,36 +43,58 @@ function notificationTemplate({ firstname, lastname, email, subject, message }) 
 
           <p style="line-height:1.7;">${formatMessage(message)}</p>
         </div>
+
       </div>
     </div>
   `;
 }
 
-function confirmationTemplate({ firstname, subject, message }) {
+function confirmationTemplate({
+  firstname,
+  subject,
+  message,
+}) {
   return `
     <div style="font-family: Arial, sans-serif; background:${COLORS.beige}; padding:30px;">
       <div style="max-width:650px; margin:auto; background:#ffffff; border-radius:16px; overflow:hidden;">
-        
+
         <div style="background:${COLORS.green}; color:${COLORS.beige}; padding:30px;">
           <h1 style="margin:0; font-size:26px;">Message bien reçu</h1>
-          <p style="margin:8px 0 0; color:${COLORS.gold};">Mohamed Zemouchi — Développeur Web</p>
+          <p style="margin:8px 0 0; color:${COLORS.gold};">
+            Mohamed Zemouchi — Développeur Web
+          </p>
         </div>
 
         <div style="padding:30px; color:${COLORS.black};">
+
           <p>Bonjour ${firstname},</p>
 
           <p style="line-height:1.7;">
-            Merci pour votre message. Je l’ai bien reçu et je vous répondrai dans les meilleurs délais.
+            Merci pour votre message.
+            Je l'ai bien reçu et je vous répondrai dans les meilleurs délais.
           </p>
 
           <hr style="border:none; border-top:1px solid #ddd; margin:25px 0;">
 
           <p><strong>Sujet :</strong> ${subject}</p>
-          <p style="line-height:1.7;">${formatMessage(message)}</p>
+
+          <p style="line-height:1.7;">
+            ${formatMessage(message)}
+          </p>
 
           <div style="margin-top:30px;">
-            <a href="${process.env.PORTFOLIO_URL || "#"}"
-               style="display:inline-block; background:${COLORS.green}; color:${COLORS.beige}; padding:12px 24px; border-radius:30px; text-decoration:none; font-weight:bold;">
+            <a
+              href="${process.env.PORTFOLIO_URL}"
+              style="
+                display:inline-block;
+                background:${COLORS.green};
+                color:${COLORS.beige};
+                padding:12px 24px;
+                border-radius:30px;
+                text-decoration:none;
+                font-weight:bold;
+              "
+            >
               Voir mon portfolio
             </a>
           </div>
@@ -91,7 +104,9 @@ function confirmationTemplate({ firstname, subject, message }) {
             <strong>Mohamed Zemouchi</strong><br>
             Développeur Web Full-Stack
           </p>
+
         </div>
+
       </div>
     </div>
   `;
@@ -104,23 +119,34 @@ async function sendContactMail({
   subject,
   message,
 }) {
-  await transporter.sendMail({
-    from: `"Portfolio Mohamed Zemouchi" <${process.env.EMAIL_USER}>`,
+  // Mail reçu par toi
+  await resend.emails.send({
+    from: "Portfolio <onboarding@resend.dev>",
     to: process.env.EMAIL_TO,
     replyTo: email,
-    subject: `${subject}`,
-    html: notificationTemplate({ firstname, lastname, email, subject, message }),
+    subject,
+    html: notificationTemplate({
+      firstname,
+      lastname,
+      email,
+      subject,
+      message,
+    }),
   });
 
-  await transporter.sendMail({
-    from: `"Mohamed Zemouchi" <${process.env.EMAIL_USER}>`,
+  // Mail de confirmation
+  await resend.emails.send({
+    from: "Mohamed Zemouchi <onboarding@resend.dev>",
     to: email,
     subject: "Votre message a bien été reçu",
-    html: confirmationTemplate({ firstname, subject, message }),
+    html: confirmationTemplate({
+      firstname,
+      subject,
+      message,
+    }),
   });
 }
 
 module.exports = {
   sendContactMail,
 };
-
