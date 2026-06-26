@@ -14,8 +14,11 @@ function Projects() {
   useEffect(() => {
     getProjects()
       .then((data) => setProjects(data))
-      .catch((error) => console.error(error));
-  }, []);
+      .catch((error) => {
+        console.error(error);
+        setError("Impossible de charger les projets.");
+  }); 
+}, []);
 
   if (!projects.length) {
     return <main className="projects-page">Chargement...</main>;
