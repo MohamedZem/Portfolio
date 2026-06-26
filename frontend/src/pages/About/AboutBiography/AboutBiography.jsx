@@ -1,7 +1,7 @@
 function AboutBiography() {
   return (
-    <section className="about__section biography">
-      <h3>Qui suis-je ?</h3>
+    <section className="about__section biography" className="about__section biography">
+      <h3 id="biography-title">Qui suis-je ?</h3>
 
       <div className="biography__intro">
         <p>
@@ -16,7 +16,7 @@ function AboutBiography() {
       <div className="biography__timeline">
 
         <article className="biography__card">
-          <span className="biography__step">2023</span>
+          <time className="biography__step">2023</time>
 
           <h4>Une reconversion choisie</h4>
 
@@ -29,7 +29,7 @@ function AboutBiography() {
         </article>
 
         <article className="biography__card">
-          <span className="biography__step">2025</span>
+          <time className="biography__step">2025</time>
 
           <h4>Formation OpenClassrooms</h4>
 
@@ -54,7 +54,7 @@ function AboutBiography() {
 
       </div>
 
-      <div className="biography__values">
+      <section className="biography__values">
 
         <div className="biography__value">
           <h5>Curiosité</h5>
@@ -76,7 +76,7 @@ function AboutBiography() {
           <p>Créer des applications performantes, accessibles et centrées utilisateur.</p>
         </div>
 
-      </div>
+      </section>
     </section>
   );
 }

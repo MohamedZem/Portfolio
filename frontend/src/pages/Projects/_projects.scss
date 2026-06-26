@@ -46,8 +46,16 @@
 
     span {
       @include tag;
-    }
-  }
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+
+      svg {
+        font-size: $font-size-lg;
+        color: $primary;
+          }
+        }
+      } 
 
   &__preview {
     @include container(1200px, 95%);
@@ -90,6 +98,14 @@
       @include primary-button;
     }
   }
+  &__details {
+  @include primary-button;
+  gap: $space-sm;
+
+  svg {
+    font-size: $font-size-base;
+  }
+}
 }
 
 @include respond-mobile {

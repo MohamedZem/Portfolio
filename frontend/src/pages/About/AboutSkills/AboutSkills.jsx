@@ -7,26 +7,26 @@ import { TbApi } from "react-icons/tb";
 function AboutSkills() {
   const skills = {
     frontend: [
-      { name: "React", icon: <FaReact /> },
-      { name: "HTML5", icon: <FaHtml5 /> },
-      { name: "CSS3", icon: <FaCss3Alt /> },
-      { name: "JavaScript", icon: <FaJs /> },
-      { name: "Responsive Design", icon: <MdDevices /> },
-      { name: "Sass", icon: <SiSass /> },
+      { name: "React", icon: <FaReact aria-hidden="true" /> },
+      { name: "HTML5", icon: <FaHtml5 aria-hidden="true" /> },
+      { name: "CSS3", icon: <FaCss3Alt aria-hidden="true" /> },
+      { name: "JavaScript", icon: <FaJs aria-hidden="true" /> },
+      { name: "Responsive Design", icon: <MdDevices aria-hidden="true" /> },
+      { name: "Sass", icon: <SiSass aria-hidden="true" /> },
     ],
     backend: [
-      { name: "Node.js", icon: <FaNodeJs /> },
-      { name: "Express", icon: <SiExpress /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
-      { name: "REST API", icon: <TbApi /> },
-      { name: "JWT", icon: <SiJsonwebtokens /> },
+      { name: "Node.js", icon: <FaNodeJs aria-hidden="true" /> },
+      { name: "Express", icon: <SiExpress aria-hidden="true" /> },
+      { name: "MongoDB", icon: <SiMongodb aria-hidden="true" /> },
+      { name: "REST API", icon: <TbApi aria-hidden="true" /> },
+      { name: "JWT", icon: <SiJsonwebtokens aria-hidden="true" /> },
     ],
     tools: [
-      { name: "Git", icon: <FaGitAlt /> },
-      { name: "VS Code", icon: <VscVscode /> },
-      { name: "Figma", icon: <FaFigma /> },
-      { name: "Postman", icon: <SiPostman /> },
-      { name: "MongoDB Atlas", icon: <SiMongodb /> },
+      { name: "Git", icon: <FaGitAlt aria-hidden="true" /> },
+      { name: "VS Code", icon: <VscVscode aria-hidden="true" /> },
+      { name: "Figma", icon: <FaFigma aria-hidden="true" /> },
+      { name: "Postman", icon: <SiPostman aria-hidden="true" /> },
+      { name: "MongoDB Atlas", icon: <SiMongodb aria-hidden="true" /> },
     ],
   };
 
@@ -36,7 +36,7 @@ function AboutSkills() {
 
       <div className="skills">
         {Object.entries(skills).map(([category, items]) => (
-          <div className="skills__category" key={category}>
+          <article className="skills__category" key={category}>
             <h4>
               {category === "frontend"
                 ? "Front-end"
@@ -53,7 +53,7 @@ function AboutSkills() {
                 </li>
               ))}
             </ul>
-          </div>
+          </article>
         ))}
       </div>
     </section>

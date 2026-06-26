@@ -56,11 +56,6 @@
       color: $text-dark;
     }
 
-    p {
-      margin-top: $space-lg;
-      line-height: $line-height-relaxed;
-      color: $text-muted;
-    }
   }
 
   &__item--featured {
@@ -93,10 +88,16 @@
   }
 
   &__school {
-    color: $primary;
+    color: $text-muted;
     font-size: $font-size-lg;
     font-weight: $font-weight-bold;
   }
+
+  &__details {
+      margin-top: $space-lg;
+      line-height: $line-height-relaxed;
+      color: $dark  
+    }
 
   &__current {
     display: inline-block;

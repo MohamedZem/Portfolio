@@ -6,16 +6,19 @@ function Error({
 	subtitle2 = "n'existe pas.",
 }) {
 	return (
-		<section className="error">
-			<span className="error__title">{title}</span>
-			<span className="error__subtitle">
+		<main className="error">
+			<h2 className="error__title">{title}</h2>
+			<p className="error__subtitle">
 				{subtitle} {subtitle2}
 
-			</span>
-			<NavLink className="error__link" to="/">
+			</p>
+			<NavLink 
+				className="error__link" to="/"
+				aria-label="Retourner à la page d'accueil"
+			>
 				Retourner sur la page d'accueil
 			</NavLink>
-		</section>
+		</main>
 	)
 }
 

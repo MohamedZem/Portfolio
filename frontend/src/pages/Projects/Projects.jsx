@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaEye } from "react-icons/fa";
 import Carousel from "../../components/Carousel/Carousel";
 import Modal from "../../components/Modal/Modal";
 import { getProjects } from "../../services/api";
+import { Link } from "react-router-dom";
+import { Icons } from "../../services/Icons";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -33,10 +35,17 @@ function Projects() {
     <div className="projects-page__infos">
       <h3>{currentProject.title}</h3>
       <div className="projects-page__tags">
-          {currentProject.technologies.map((tech) => (
-          <span key={tech}>{tech}</span>
-        ))}
-      </div>
+  {currentProject.technologies?.map((tech) => {
+    const Icon = Icons[tech];
+
+    return (
+      <span key={tech}>
+        {Icon && <Icon />}
+        {tech}
+      </span>
+    );
+  })}
+</div>
       <p>{currentProject.description}</p>
     
     <div className="projects-page__preview">
@@ -52,12 +61,20 @@ function Projects() {
    
 
       <div className="projects-page__links">
+        <Link to={`/projects/${currentProject.githubName}`}
+        className="projects-page__details"
+        aria-label={`Voir les détails du projet ${currentProject.title}`}
+        >
+          <FaEye aria-hidden="true"/>
+          Voir le détail
+        </Link>
         <a
           href={currentProject.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`Voir le dépôt GitHub du projet ${currentProject.title}`}
         >
-          <FaGithub />
+          <FaGithub aria-hidden="true"/>
           Dépôt GitHub
         </a>
 
@@ -66,8 +83,9 @@ function Projects() {
             href={currentProject.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Voir la démonstration du projet ${currentProject.title}`}
           >
-            <FaExternalLinkAlt />
+            <FaExternalLinkAlt aria-hidden="true"/>
             Voir le site
           </a>
         )}

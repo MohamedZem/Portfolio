@@ -54,11 +54,14 @@ function Contact() {
 
   return (
     <main className="contact-page">
-      <section className="contact-page__container">
+      <section 
+      className="contact-page__container"
+      aria-labelledby="contact-title"
+      >
         <div className="contact-page__intro">
-          <p className="contact-page__eyebrow">Contact</p>
+          <h2 className="contact-page__eyebrow">Contact</h2>
 
-          <h3>Discutons de votre projet</h3>
+          <h3 id="contact-title">Discutons de votre projet</h3>
 
           <p>
             Une question, une opportunité d’alternance ou un projet web ?
@@ -78,7 +81,11 @@ function Contact() {
 </div>
         </div>
 
-        <form className="contact-page__form" onSubmit={handleSubmit}>
+        <form 
+        className="contact-page__form" 
+        onSubmit={handleSubmit}
+        aria-busy={loading}
+        >
           <div className="contact-page__row">
             <div className="contact-page__field">
               <label htmlFor="lastname">Nom</label>
@@ -88,6 +95,7 @@ function Contact() {
                 name="lastname"
                 value={formData.lastname}
                 onChange={handleChange}
+                autoComplete="family-name"
                 required
               />
             </div>
@@ -100,6 +108,7 @@ function Contact() {
                 name="firstname"
                 value={formData.firstname}
                 onChange={handleChange}
+                autoComplete="given-name"
                 required
               />
             </div>
@@ -113,6 +122,7 @@ function Contact() {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               required
             />
           </div>
@@ -125,6 +135,7 @@ function Contact() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
+              autoComplete="off"
               required
             />
           </div>
@@ -153,6 +164,8 @@ function Contact() {
                   ? "contact-page__message contact-page__message--success"
                   : "contact-page__message contact-page__message--error"
               }
+              role="status"
+              aria-live="polite"
             >
               {status.message}
             </p>

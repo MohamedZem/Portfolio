@@ -11,6 +11,7 @@ import AboutEducation from "./pages/About/AboutEducation/AboutEducation";
 import AboutSkills from "./pages/About/AboutSkills/AboutSkills";
 
 import Projects from './pages/Projects/Projects.jsx';
+import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
 import Contact from './pages/Contact/Contact.jsx';
 import Error from './pages/Error/Error.jsx';
 
@@ -29,8 +30,8 @@ function Router () {
                         <Route path="education" element={<AboutEducation />} />
                         </Route>
                     <Route path="projects" element={<Projects />} />
+                    <Route path="projects/:githubName" element={<ProjectDetails />} />
                     <Route path="contact" element={<Contact />} />
-                    <Route path="/error" element={<Error />} />
                     <Route path="*" element={<Error />} />
                 </Route>
             </Routes>

@@ -2,23 +2,25 @@ import { FaTruckMoving, FaStore, FaArrowRight} from "react-icons/fa";
 
 function AboutExperience() {
   return (
-    <section className="about__section experience">
+    <section className="about__section experience"  aria-labelledby="experience-title">
 
-      <h3>Expériences professionnelles</h3>
+      <h3 id="experience-title">
+        Expériences professionnelles
+      </h3>
 
       <div className="experience__list">
 
         <article className="experience__card">
 
           <div className="experience__icon">
-            <FaTruckMoving />
+            <FaTruckMoving aria-hidden="true" />
           </div>
 
           <div className="experience__content">
 
-            <span className="experience__date">
+            <time className="experience__date">
               2018 — 2023
-            </span>
+            </time>
 
             <h4>
               Responsable d'une société de transport de marchandises
@@ -31,34 +33,34 @@ function AboutExperience() {
               relation client, prise de décision et résolution de problèmes.
             </p>
 
-            <div className="experience__skills">
+            <ul className="experience__skills">
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Gestion de projet
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Management
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Relation client
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Organisation
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Résolution de problèmes
-              </span>
+              </li>
 
-            </div>
+            </ul>
 
           </div>
 
@@ -67,14 +69,14 @@ function AboutExperience() {
         <article className="experience__card">
 
           <div className="experience__icon">
-            <FaStore />
+            <FaStore aria-hidden="true"/>
           </div>
 
           <div className="experience__content">
 
-            <span className="experience__date">
+            <time className="experience__date">
               2012 — 2018
-            </span>
+            </time>
 
             <h4>
               Équipier de vente (Contrat étudiant)
@@ -87,29 +89,29 @@ function AboutExperience() {
               mon organisation et mon esprit d'équipe.
             </p>
 
-            <div className="experience__skills">
+            <ul className="experience__skills">
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Travail en équipe
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Service client
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Gestion des stocks
-              </span>
+              </li>
 
-              <span>
-                <FaArrowRight />
+              <li>
+                <FaArrowRight aria-hidden="true"/>
                 Polyvalence
-              </span>
+              </li>
 
-            </div>
+            </ul>
 
           </div>
 

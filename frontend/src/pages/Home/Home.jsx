@@ -4,6 +4,7 @@ import photo from "../../assets/illustration-home.webp";
 
 const githubUrl = `https://github.com/${import.meta.env.VITE_GITHUB_USERNAME}`;
 const linkedinUrl = import.meta.env.VITE_LINKEDIN_URL;
+const email = import.meta.env.VITE_EMAIL;
 
 function Home() {
   return (
@@ -27,49 +28,66 @@ function Home() {
 
           <p className="home__role">Développeur Web</p>
 
-          <div className="home__socials">
-            <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <nav className="home__socials" aria-label="Liens sociaux">
+            <a
+              href={githubUrl}
+              aria-label="Voir mon profil GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGithub />
             </a>
 
-            <a href={linkedinUrl} alt="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <a
+              href={linkedinUrl}
+              aria-label="Voir mon profil LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaLinkedin />
             </a>
 
-            <a href="mailto:zemouchi.moh@gmail.com" aria-label="Envoyer un email">
+            <a
+              href={`mailto:${email}`}
+              aria-label="M'envoyer un e-mail"
+            >
               <FaEnvelope />
             </a>
-          </div>
+          </nav>
         </div>
 
         <div className="home__intro">
-          <h2 className="home__welcome">Bienvenue,</h2>
+          <p className="home__welcome">Bienvenue,</p>
 
-          <h3 className="home__title">
-            Je transforme des idées en <span>applications web</span> modernes et performantes.
-          </h3>
+          <h2 className="home__title">
+            Je transforme des idées en{" "}
+            <span>applications web</span> modernes et performantes.
+          </h2>
 
           <div className="home__buttons">
-           <a
+            <a
               href="/cv/Mohamed_Zemouchi_CV.pdf"
               download
               className="home__button"
-              aria-label="Télécharger mon CV"
+              aria-label="Télécharger mon CV au format PDF"
             >
-              <FaDownload />
+              <FaDownload aria-hidden="true" />
               CV
-          </a>
+            </a>
 
-            <Link to="/projects" className="home__button">
-            <FaLaptopCode />
+            <Link
+              to="/projects"
+              className="home__button"
+              aria-label="Voir mes projets"
+            >
+              <FaLaptopCode aria-hidden="true" />
               Projets
             </Link>
           </div>
 
           <p className="home__description">
-            Développeur web, je conçois des
-            applications modernes, accessibles et centrées sur les besoins
-            utilisateurs.
+            Développeur web, je conçois des applications modernes, accessibles
+            et centrées sur les besoins utilisateurs.
           </p>
         </div>
       </section>

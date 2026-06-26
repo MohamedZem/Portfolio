@@ -29,9 +29,13 @@ function Carousel({ projects, currentIndex, setCurrentIndex }) {
   }
 
   return (
-    <section className="carousel">
-      <button className="carousel__arrow" onClick={previousProject}>
-        <FaChevronLeft />
+    <section className="carousel" aria-label="Carousel des projets">
+      <button
+        className="carousel__arrow"
+        onClick={previousProject}
+        aria-label="Afficher le projet précédent"
+      >
+        <FaChevronLeft aria-hidden="true" />
       </button>
 
       <div className="carousel__thumbs">
@@ -43,15 +47,19 @@ function Carousel({ projects, currentIndex, setCurrentIndex }) {
             }`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Afficher le projet ${project.title}`}
+            aria-current={active ? "true" : undefined}
           >
-            <img src={project.logoUrl} alt={project.title} />
-
+            <img src={project.logoUrl} alt="" aria-hidden="true" />
           </button>
         ))}
       </div>
 
-      <button className="carousel__arrow" onClick={nextProject}>
-        <FaChevronRight />
+      <button
+        className="carousel__arrow"
+        onClick={nextProject}
+        aria-label="Afficher le projet suivant"
+      >
+        <FaChevronRight aria-hidden="true" />
       </button>
     </section>
   );

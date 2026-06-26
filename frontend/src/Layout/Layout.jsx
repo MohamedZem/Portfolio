@@ -3,15 +3,14 @@ import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 
 function Layout() {
-  const location = useLocation();
-
+  
   return (
     <div className="layout">
       <Header />
   
-      <main className="layout__content">
+      <div className="layout__content">
         <Outlet />
-      </main>
+      </div>
 
       <Footer />
     </div>

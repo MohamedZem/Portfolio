@@ -19,11 +19,6 @@
     background: $beige;
     color: $black;
 
-    h1 {
-      margin: $space-xl 0;
-      font-size: 52px;
-      line-height: $line-height-tight;
-    }
 
     p {
       font-size: $font-size-lg;
@@ -32,7 +27,7 @@
   }
 
   &__eyebrow {
-    color: $primary;
+    color: $green;
     text-transform: uppercase;
     letter-spacing: 4px;
     font-weight: $font-weight-bold;

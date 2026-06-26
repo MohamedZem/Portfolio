@@ -58,6 +58,8 @@
   .footer {
     padding: $space-5xl $space-lg;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 
     &__content {
       flex-direction: column;

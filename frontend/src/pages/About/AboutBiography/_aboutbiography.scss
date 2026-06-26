@@ -98,6 +98,18 @@
   }
 }
 
+@include respond-large {
+  .biography {
+    &__timeline {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    &__values {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
 @include respond-tablet {
   .biography {
     gap: $space-4xl;
