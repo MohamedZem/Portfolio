@@ -50,7 +50,7 @@ exports.syncProjects = async (req, res) => {
         },
         {
           upsert: true,
-          new: true,
+          returnDocument: "after",
         }
       );
     }
