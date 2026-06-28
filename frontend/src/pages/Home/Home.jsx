@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaLaptopCode} from "react-icons/fa";
 import photo from "../../assets/illustration-home.webp";
-import { getProjects } from "../../services/api";
-
 
 const githubUrl = `https://github.com/${import.meta.env.VITE_GITHUB_USERNAME}`;
 const linkedinUrl = import.meta.env.VITE_LINKEDIN_URL;
