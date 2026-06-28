@@ -72,6 +72,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: $space-lg;
+    padding: 0;
 
     li {
       display: flex;
@@ -115,6 +116,7 @@
     }
 
     &__skills {
+      padding: 0;
       justify-content: center;
     }
   }
