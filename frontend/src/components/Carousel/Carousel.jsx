@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "../../services/api";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Carousel({ projects, currentIndex, setCurrentIndex }) {
@@ -49,11 +50,11 @@ function Carousel({ projects, currentIndex, setCurrentIndex }) {
             aria-label={`Afficher le projet ${project.title}`}
             aria-current={active ? "true" : undefined}
           >
-            <img 
-              src={project.logoUrl} 
-              alt="" 
+            <img
+              src={`${BACKEND_URL}${project.logoUrl}`}
+              alt=""
               loading="lazy"
-              aria-hidden="true" 
+              aria-hidden="true"
             />
           </button>
         ))}

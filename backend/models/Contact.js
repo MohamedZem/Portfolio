@@ -17,21 +17,18 @@ const contactSchema = new mongoose.Schema(
     },
 
     email: {
-  type: String,
-  required: true,
-  trim: true,
-  lowercase: true,
-  match: [
-    /^\S+@\S+\.\S+$/,
-    "Adresse e-mail invalide",
-        ],
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      match: [/^\S+@\S+\.\S+$/, "Adresse e-mail invalide"],
     },
 
     subject: {
       type: String,
       required: true,
       trim: true,
-      maxlength: 50,
+      maxlength: 100,
     },
 
     message: {
@@ -53,17 +50,13 @@ const contactSchema = new mongoose.Schema(
     },
 
     ipAddress: {
-    type: String,
-    default: null,
+      type: String,
+      default: null,
     },
-
   },
   {
     timestamps: true,
   }
-  
 );
 
-const Contact = mongoose.model("Contact", contactSchema);
-
-module.exports = Contact;
+module.exports = mongoose.model("Contact", contactSchema);

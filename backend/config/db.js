@@ -7,7 +7,9 @@ const connectDB = async () => {
     console.log("Connexion à MongoDB réussie");
   } catch (error) {
     console.error("Impossible de se connecter à MongoDB");
-    throw error;
+    console.error(error);
+
+    process.exit(1);
   }
 };
 

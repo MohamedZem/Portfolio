@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BACKEND_URL } from "../../services/api";
 import { FaGithub, FaExternalLinkAlt, FaEye } from "react-icons/fa";
 import Carousel from "../../components/Carousel/Carousel";
 import Modal from "../../components/Modal/Modal";
@@ -17,8 +18,7 @@ function Projects() {
   useEffect(() => {
     getProjects()
       .then((data) => {
-        console.log("DATA API :", data);
-
+        
         if (Array.isArray(data)) {
           setProjects(data);
           setCurrentIndex(0);
@@ -93,9 +93,9 @@ function Projects() {
         onClick={() => setIsModalOpen(true)}
         aria-label={`Agrandir l'image du projet ${currentProject.title}`}
       >
-        <img 
-          src={currentProject.imageUrl} 
-          alt={currentProject.title} 
+        <img
+          src={`${BACKEND_URL}${currentProject.imageUrl}`}
+          alt={currentProject.title}
           loading="eager"
         />
       </button>
@@ -137,7 +137,7 @@ function Projects() {
 
     {isModalOpen && (
       <Modal
-        imageUrl={currentProject.imageUrl}
+        imageUrl={`${BACKEND_URL}${currentProject.imageUrl}`}
         title={currentProject.title}
         onClose={() => setIsModalOpen(false)}
       />

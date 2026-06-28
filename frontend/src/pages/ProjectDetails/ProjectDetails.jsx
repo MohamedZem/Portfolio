@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import { BACKEND_URL } from "../../services/api";
 import { getProjects } from "../../services/api";
 import Collapse from "../../components/Collapse/Collapse";
 import Modal from "../../components/Modal/Modal";
@@ -25,8 +26,8 @@ function ProjectDetails() {
   }
 
   const images = project.galleryUrls?.length
-    ? project.galleryUrls
-    : [project.imageUrl];
+    ? project.galleryUrls.map((image) => `${BACKEND_URL}${image}`)
+    : [`${BACKEND_URL}${project.imageUrl}`];
 
   const previousImage = () => {
     setCurrentImageIndex((prev) =>

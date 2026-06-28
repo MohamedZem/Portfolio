@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema(
   {
-    githubId: Number,
     githubName: String,
     title: String,
     description: String,

@@ -2,31 +2,21 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-function createImageFilename(baseName, updatedAt) {
-  const cleanName = baseName
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]/g, "");
-
-  const version = new Date(updatedAt).getTime();
-
-  return `${cleanName}-${version}.webp`;
+function ensureDir(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
 }
 
-async function optimizeGithubImage(imageUrl, baseName, updatedAt, type = "image") {
-  const imagesDir = path.resolve(__dirname, "../images");
+async function optimizeImageFromUrl({
+  imageUrl,
+  outputDir,
+  filename,
+  type = "image",
+}) {
+  ensureDir(outputDir);
 
-  if (!fs.existsSync(imagesDir)) {
-    fs.mkdirSync(imagesDir, { recursive: true });
-  }
-
-  const finalFilename = createImageFilename(baseName, updatedAt);
-  const outputPath = path.join(imagesDir, finalFilename);
-
-  if (fs.existsSync(outputPath)) {
-    console.log(`Image déjà optimisée : ${finalFilename}`);
-    return `/images/${finalFilename}`;
-  }
+  const outputPath = path.join(outputDir, filename);
 
   const response = await fetch(imageUrl, {
     headers: {
@@ -35,7 +25,7 @@ async function optimizeGithubImage(imageUrl, baseName, updatedAt, type = "image"
   });
 
   if (!response.ok) {
-    throw new Error("Impossible de télécharger l'image GitHub.");
+    throw new Error(`Impossible de télécharger l'image : ${imageUrl}`);
   }
 
   const buffer = Buffer.from(await response.arrayBuffer());
@@ -55,8 +45,6 @@ async function optimizeGithubImage(imageUrl, baseName, updatedAt, type = "image"
           background: "#f4ece6",
         };
 
-  console.log(`Optimisation de ${finalFilename}`);
-
   await sharp(buffer)
     .resize(resizeOptions)
     .webp({
@@ -65,9 +53,9 @@ async function optimizeGithubImage(imageUrl, baseName, updatedAt, type = "image"
     })
     .toFile(outputPath);
 
-  return `/images/${finalFilename}`;
+  return outputPath;
 }
 
 module.exports = {
-  optimizeGithubImage,
+  optimizeImageFromUrl,
 };

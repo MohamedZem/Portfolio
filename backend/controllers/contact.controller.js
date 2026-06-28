@@ -3,8 +3,6 @@ const { sendContactMail } = require("../services/mail");
 
 exports.sendMessage = async (req, res) => {
   try {
-    console.log("Contact reçu :", req.body);
-
     const { firstname, lastname, email, subject, message } = req.body;
 
     const contact = new Contact({
@@ -17,13 +15,9 @@ exports.sendMessage = async (req, res) => {
       ipAddress: req.ip,
     });
 
-    console.log("Avant sauvegarde MongoDB");
     await contact.save();
-    console.log("Après sauvegarde MongoDB");
 
     try {
-      console.log("Avant envoi email");
-
       await sendContactMail({
         firstname,
         lastname,
@@ -31,8 +25,6 @@ exports.sendMessage = async (req, res) => {
         subject,
         message,
       });
-
-      console.log("Email envoyé");
 
       contact.status = "sent";
       contact.sentAt = new Date();
