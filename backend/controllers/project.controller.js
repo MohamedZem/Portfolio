@@ -11,17 +11,17 @@ exports.getAllProjects = async (req, res) => {
     const now = Date.now();
 
     if (cachedProjects && cacheDate && now - cacheDate < CACHE_DURATION) {
-      console.log("📦 Projets servis depuis le cache");
+      console.log("Projets servis depuis le cache");
       return res.status(200).json(cachedProjects);
     }
 
     if (pendingProjectsRequest) {
-      console.log("⏳ Récupération déjà en cours");
+      console.log("Récupération déjà en cours");
       const projects = await pendingProjectsRequest;
       return res.status(200).json(projects);
     }
 
-    console.log("🌐 Récupération des projets depuis GitHub");
+    console.log("Récupération des projets depuis GitHub");
 
     pendingProjectsRequest = getGithubPortfolioProjects();
 
