@@ -4,7 +4,7 @@ let cachedProjects = null;
 let cacheDate = null;
 let pendingProjectsRequest = null;
 
-const CACHE_DURATION = 1000 * 60 * 30;
+const CACHE_DURATION = 1000 * 60 * 60;
 
 exports.getAllProjects = async (req, res) => {
   try {
