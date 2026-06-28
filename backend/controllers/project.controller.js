@@ -1,44 +1,61 @@
+const Project = require("../models/Project");
 const { getGithubPortfolioProjects } = require("../services/github");
-
-let cachedProjects = null;
-let cacheDate = null;
-let pendingProjectsRequest = null;
-
-const CACHE_DURATION = 1000 * 60 * 60;
 
 exports.getAllProjects = async (req, res) => {
   try {
-    const now = Date.now();
+    const projects = await Project.find().sort({ order: 1, updatedAt: -1 });
 
-    if (cachedProjects && cacheDate && now - cacheDate < CACHE_DURATION) {
-      console.log("Projets servis depuis le cache");
-      return res.status(200).json(cachedProjects);
-    }
-
-    if (pendingProjectsRequest) {
-      console.log("Récupération déjà en cours");
-      const projects = await pendingProjectsRequest;
-      return res.status(200).json(projects);
-    }
-
-    console.log("Récupération des projets depuis GitHub");
-
-    pendingProjectsRequest = getGithubPortfolioProjects();
-
-    const projects = await pendingProjectsRequest;
-
-    cachedProjects = projects ?? [];
-    cacheDate = Date.now();
-    pendingProjectsRequest = null;
-
-    return res.status(200).json(cachedProjects);
+    return res.status(200).json(projects);
   } catch (error) {
-    pendingProjectsRequest = null;
-
     console.error(error);
 
     return res.status(500).json({
       message: "Erreur lors de la récupération des projets.",
+    });
+  }
+};
+
+exports.syncProjects = async (req, res) => {
+  try {
+    console.log("Synchronisation des projets depuis GitHub");
+
+    const projects = await getGithubPortfolioProjects();
+
+    await Project.deleteMany();
+
+    await Project.insertMany(
+      projects.map((project) => ({
+        githubId: project.id,
+        githubName: project.githubName,
+        title: project.title,
+        description: project.description,
+        technologies: project.technologies,
+        imageUrl: project.imageUrl,
+        logoUrl: project.logoUrl,
+        galleryUrls: project.galleryUrls,
+        githubUrl: project.githubUrl,
+        demoUrl: project.demoUrl,
+        order: project.order,
+        featured: project.featured,
+        category: project.category,
+        context: project.context,
+        objectives: project.objectives,
+        skills: project.skills,
+        results: project.results,
+        improvements: project.improvements,
+        updatedAt: project.updatedAt,
+      }))
+    );
+
+    return res.status(200).json({
+      message: "Projets synchronisés avec succès.",
+      count: projects.length,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Erreur lors de la synchronisation des projets.",
     });
   }
 };
