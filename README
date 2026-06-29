@@ -1,0 +1,244 @@
+# Portfolio – Mohamed Zemouchi
+
+Portfolio personnel développé dans le cadre de ma formation **Développeur Web OpenClassrooms**.
+
+Il présente mon parcours, mes compétences et mes projets de formation au travers d'une application **full-stack** développée avec **React**, **Node.js**, **Express** et **MongoDB**.
+
+---
+
+# Aperçu
+
+![Aperçu du Portfolio](../public/page-d-accueil.png)
+
+---
+
+# Fonctionnalités
+
+* Présentation de mon parcours professionnel et de mes compétences.
+* Galerie de projets interactive.
+* Page détaillée pour chaque projet.
+* Formulaire de contact avec enregistrement en base de données et envoi d'e-mail.
+* Navigation fluide grâce à React Router.
+* Design responsive.
+* Optimisations SEO, accessibilité et performances.
+
+---
+
+# Technologies utilisées
+
+## Frontend
+
+* React
+* React Router
+* Vite
+* Sass
+* React Icons
+
+## Backend
+
+* Node.js
+* Express
+* MongoDB
+* Mongoose
+
+## Services
+
+* Sharp (optimisation automatique des images)
+* Resend (envoi des e-mails)
+* GitHub API
+
+---
+
+# Architecture
+
+```text
+Frontend React
+        │
+        ▼
+ API Express (Node.js)
+        │
+        ├──────────────► MongoDB
+        │                 (projets + contacts)
+        │
+        ├──────────────► Images optimisées
+        │                 (Sharp)
+        │
+        └──────────────► Resend
+                          (envoi des e-mails)
+```
+
+---
+
+# Synchronisation automatique des projets
+
+Le portfolio utilise un script de synchronisation permettant d'automatiser la gestion des projets.
+
+Le script :
+
+* récupère les dépôts GitHub sélectionnés ;
+* lit le fichier `portfolio.json` présent dans chaque dépôt ;
+* télécharge les images ;
+* optimise automatiquement les images avec **Sharp** ;
+* les convertit au format **WebP** ;
+* les stocke dans le backend ;
+* met à jour automatiquement la collection **Projects** dans MongoDB.
+
+Ainsi, les visiteurs ne communiquent jamais directement avec GitHub.
+
+Les données proviennent de MongoDB tandis que les images optimisées sont servies directement par le backend.
+
+Cette architecture améliore :
+
+* les performances ;
+* le temps de chargement ;
+* la stabilité ;
+* la maintenabilité.
+
+---
+
+# Structure du projet
+
+```text
+Portfolio
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   └── dist
+│
+├── backend
+│   ├── controllers
+│   ├── routes
+│   ├── models
+│   ├── services
+│   ├── scripts
+│   ├── config
+│   └── images
+│
+└── README.md
+```
+
+---
+
+# Installation
+
+## Cloner le projet
+
+```bash
+git clone https://github.com/MohamedZem/Portfolio.git
+```
+
+## Installer les dépendances
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+```
+
+### Backend
+
+```bash
+cd backend
+npm install
+```
+
+---
+
+# Variables d'environnement
+
+Créer un fichier `.env` dans le backend :
+
+```env
+PORT=4000
+
+MONGO_URI=...
+
+GITHUB_USERNAME=...
+
+GITHUB_TOKEN=...
+
+RESEND_API_KEY=...
+
+EMAIL_TO=...
+
+API_BASE_URL=http://localhost:4000
+```
+
+Créer un fichier `.env` dans le frontend :
+
+```env
+VITE_API_URL=http://localhost:4000/api
+
+VITE_EMAIL=...
+
+VITE_GITHUB_USERNAME=...
+
+VITE_LINKEDIN_URL=...
+```
+
+---
+
+# Lancer le projet
+
+## Backend
+
+```bash
+npm run dev
+```
+
+## Frontend
+
+```bash
+npm run dev
+```
+
+---
+
+# Synchroniser les projets
+
+Pour mettre à jour automatiquement les projets depuis GitHub :
+
+```bash
+npm run sync-projects
+```
+
+Le script :
+
+* récupère les informations des dépôts GitHub ;
+* optimise les images ;
+* met à jour MongoDB.
+
+---
+
+# Optimisations
+
+Le portfolio intègre plusieurs optimisations :
+
+* Images converties automatiquement en WebP.
+* Optimisation avec Sharp.
+* Images servies localement par le backend.
+* Données des projets stockées dans MongoDB.
+* Lazy loading des images secondaires.
+* API REST.
+* Responsive Design.
+* SEO.
+* Accessibilité.
+
+---
+
+# 📬 Contact
+
+Vous pouvez me contacter directement via le formulaire du portfolio ou par LinkedIn.
+
+---
+
+# Auteur
+
+**Mohamed Zemouchi**
+
+Développeur Web Full-Stack
+
+* GitHub : https://github.com/MohamedZem
+* LinkedIn : www.linkedin.com/in/mohamed-zemouchi
